@@ -29,7 +29,7 @@ composer create-project --prefer-dist marks-software-gmbh/bechlem-connect-light
 In case you want to use a custom app dir name (e.g. `/myapp/`):
 
 ```bash
-composer create-project --prefer-dist marks-software-gmbh/yab-cms-ff my-bechlem-connect
+composer create-project --prefer-dist marks-software-gmbh/bechlem-connect-light my-bechlem-connect
 ```
 
 Then configure your database in `config/app_local.php` or use the default Sqlite Setup and visit the site.
