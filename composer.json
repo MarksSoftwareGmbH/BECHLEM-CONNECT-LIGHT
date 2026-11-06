@@ -45,7 +45,7 @@
         "friendsofcake/search": "^7.9",
         "intervention/image": "^4.4",
         "mobiledetect/mobiledetectlib": "^4.8.03",
-        "phpoffice/phpspreadsheet": "^2.4.8",
+        "phpoffice/phpspreadsheet": "^5.10.0",
         "phpoffice/phpword": "^1.4"
     },
     "require-dev": {
