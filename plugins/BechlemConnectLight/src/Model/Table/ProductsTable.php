@@ -120,7 +120,7 @@ class ProductsTable extends Table
         ]);
 
         // Setup search filter using search manager
-        $this->searchManager()
+        $this->getBehavior('Search')->searchManager()
             ->value('product_type', [
                 'fields' => ['ProductTypes.alias']
             ])
@@ -500,7 +500,7 @@ class ProductsTable extends Table
     /**
      * Find by slug method.
      *
-     * @param SelectQuery $quer
+     * @param SelectQuery $query
      * @param array $options
      * @return SelectQuery
      */
@@ -562,7 +562,7 @@ class ProductsTable extends Table
      *
      * @return object
      */
-    public function getTypeWithProductTypes(string $productType = null)
+    public function getTypeWithProductTypes(string $productType)
     {
         return $this->ProductTypes
             ->find()

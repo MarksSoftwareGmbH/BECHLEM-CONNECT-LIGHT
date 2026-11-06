@@ -93,7 +93,7 @@ class BechlemConnectRequest extends Entity
      * @return string
      * @link http://book.cakephp.org/3.0/en/core-libraries/inflector.html#creating-url-safe-strings
      */
-    protected function _setName($name)
+    protected function _setName(string $name)
     {
         $this->set('slug', Text::slug(strtolower($name)));
         return $name;

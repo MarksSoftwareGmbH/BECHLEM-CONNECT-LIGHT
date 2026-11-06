@@ -110,12 +110,8 @@ $this->Breadcrumbs->add([
 </div>
 <?= $this->Form->end(); ?>
 
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'slug' . DS . 'jquery.slug',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'roles' . DS . 'form',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/slug/jquery.slug', ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/roles/form', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Roles.init();

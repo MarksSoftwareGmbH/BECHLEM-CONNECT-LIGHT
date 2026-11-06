@@ -83,14 +83,6 @@ $this->Breadcrumbs->add([
         <h1>
             <?= __d('bechlem_connect_light', 'Application documentation'); ?>
             <?= $this->Html->link(
-                $this->Html->tag('i', '', ['class' => 'fas fa-file-pdf']),
-                '/admin/application-documentation-pdf',
-                [
-                    'target'    => '_self',
-                    'title'     => __d('bechlem_connect_light', 'Download as PDF'),
-                    'escape'    => false,
-                ]); ?>
-            <?= $this->Html->link(
                 $this->Html->tag('i', '', ['class' => 'fas fa-print']),
                 '#',
                 [

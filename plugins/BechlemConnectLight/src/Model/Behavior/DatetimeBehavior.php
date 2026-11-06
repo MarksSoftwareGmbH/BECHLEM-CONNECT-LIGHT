@@ -47,7 +47,6 @@ class DatetimeBehavior extends Behavior
     public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
     {
         $attributes = [
-            'entry_date',
             'promote_start',
             'promote_end',
             'promote_new_start',

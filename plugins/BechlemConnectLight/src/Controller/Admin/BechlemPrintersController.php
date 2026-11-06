@@ -89,7 +89,7 @@ class BechlemPrintersController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $bechlemPrinter = $this->BechlemPrinters->get($id);
 

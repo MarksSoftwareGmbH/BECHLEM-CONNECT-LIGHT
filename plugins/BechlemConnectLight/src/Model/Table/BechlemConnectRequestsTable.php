@@ -93,7 +93,7 @@ class BechlemConnectRequestsTable extends Table
         ]);
 
         // Setup search filter using search manager
-        $this->searchManager()
+        $this->getBehavior('Search')->searchManager()
             ->value('config', [
                 'fields' => ['BechlemConnectConfigs.alias']
             ])
@@ -101,6 +101,8 @@ class BechlemConnectRequestsTable extends Table
                 'fields' => ['method']
             ])
             ->add('search', 'Search.Like', [
+                'multiValue' => true,
+                'multiValueSeparator' => ' ',
                 'before' => true,
                 'after' => true,
                 'fieldMode' => 'OR',
@@ -129,6 +131,7 @@ class BechlemConnectRequestsTable extends Table
     public $tableColumns = [
         'id',
         'bechlem_connect_config_id',
+        'uuid_id',
         'name',
         'slug',
         'method',
@@ -242,7 +245,7 @@ class BechlemConnectRequestsTable extends Table
      *
      * @return array|string
      */
-    public function runRequest(object $controller = null, object $bechlemConnectRequest = null)
+    public function runRequest(?object $controller = null, ?object $bechlemConnectRequest = null)
     {
         $response = [];
         try {
@@ -297,7 +300,7 @@ class BechlemConnectRequestsTable extends Table
      *
      * @return array|string
      */
-    public function httpCall(object $bechlemConnectRequest = null)
+    public function httpCall(?object $bechlemConnectRequest = null)
     {
         $data = [];
         try {

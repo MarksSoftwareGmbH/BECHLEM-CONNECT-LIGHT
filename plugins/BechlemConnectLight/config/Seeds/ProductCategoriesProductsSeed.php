@@ -24,12 +24,12 @@ declare(strict_types=1);
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-use Migrations\AbstractSeed;
+use Migrations\BaseSeed;
 
 /**
  * ProductCategoriesProducts seed.
  */
-class ProductCategoriesProductsSeed extends AbstractSeed
+class ProductCategoriesProductsSeed extends BaseSeed
 {
     /**
      * Run Method.

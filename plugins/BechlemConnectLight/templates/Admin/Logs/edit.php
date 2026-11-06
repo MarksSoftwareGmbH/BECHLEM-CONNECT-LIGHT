@@ -125,9 +125,7 @@ $this->Breadcrumbs->add([
 </div>
 <?= $this->Form->end(); ?>
 
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'logs' . DS . 'form',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/logs/form', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Logs.init();

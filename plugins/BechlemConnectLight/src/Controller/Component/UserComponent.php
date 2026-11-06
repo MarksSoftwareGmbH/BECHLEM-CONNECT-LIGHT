@@ -57,7 +57,7 @@ class UserComponent extends Component
      *
      * @param \Cake\Event\Event $event Event instance.
      */
-    public function beforeFilter(Event $event)
+    public function beforeFilter(Event $event): void
     {
         $Controller = $event->getSubject();
     }

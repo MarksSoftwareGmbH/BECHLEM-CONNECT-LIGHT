@@ -131,9 +131,7 @@ $this->Breadcrumbs->add([
 <?= $this->Form->end(); ?>
 
 <?= $this->element('please_wait'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'countries' . DS . 'form',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/countries/form', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Countries.init();

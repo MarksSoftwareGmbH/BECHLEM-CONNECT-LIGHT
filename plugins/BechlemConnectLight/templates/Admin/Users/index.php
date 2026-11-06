@@ -159,18 +159,17 @@ $this->Breadcrumbs->add([
                 ]); ?>
                 <?= $this->Form->end(); ?>
             </div>
-
             <div class="card-body table-responsive">
-                <table class="table table-hover table-data">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('Roles.title', __d('bechlem_connect_light', 'Role')); ?></th>
-                        <th><?= $this->Paginator->sort('Locales.name', __d('bechlem_connect_light', 'Locale')); ?></th>
-                        <th><?= $this->Paginator->sort('username', __d('bechlem_connect_light', 'Username')); ?></th>
-                        <th><?= $this->Paginator->sort('name', __d('bechlem_connect_light', 'Name')); ?></th>
-                        <th><?= $this->Paginator->sort('email', __d('bechlem_connect_light', 'Email')); ?></th>
-                        <th><?= $this->Paginator->sort('status', __d('bechlem_connect_light', 'Status')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('Roles.title', __d('bechlem_connect_light', 'Role')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('Locales.name', __d('bechlem_connect_light', 'Locale')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('username', __d('bechlem_connect_light', 'Username')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('name', __d('bechlem_connect_light', 'Name')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('email', __d('bechlem_connect_light', 'Email')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('status', __d('bechlem_connect_light', 'Status')); ?></strong></small></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -189,6 +188,7 @@ $this->Breadcrumbs->add([
                             <td><?= h($user->email); ?></td>
                             <td><?= $this->BechlemConnectLight->status(h($user->status)); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?= $this->Html->link(
                                     $this->Html->icon('eye'),
                                     [
@@ -246,6 +246,7 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escapeTitle'   => false,
                                     ]); ?>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -256,10 +257,7 @@ $this->Breadcrumbs->add([
         </div>
     </div>
 </div>
-
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();

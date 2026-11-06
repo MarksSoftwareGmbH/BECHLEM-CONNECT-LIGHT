@@ -182,20 +182,19 @@ $this->Breadcrumbs->add([
                 ]); ?>
                 <?= $this->Form->end(); ?>
             </div>
-
             <div class="card-body table-responsive">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('foreign_key', __d('bechlem_connect_light', 'Foreign key')); ?></th>
-                        <th><?= $this->Paginator->sort('name', __d('bechlem_connect_light', 'Name')); ?></th>
-                        <th><?= $this->Paginator->sort('slug', __d('bechlem_connect_light', 'Slug')); ?></th>
-                        <th><?= $this->Paginator->sort('parent_id', __d('bechlem_connect_light', 'Parent')); ?></th>
-                        <th><?= $this->Paginator->sort('lft', __d('bechlem_connect_light', 'Left')); ?></th>
-                        <th><?= $this->Paginator->sort('rght', __d('bechlem_connect_light', 'Right')); ?></th>
-                        <th><?= $this->Paginator->sort('locale', __d('bechlem_connect_light', 'Locale')); ?></th>
-                        <th><?= $this->Paginator->sort('status', __d('bechlem_connect_light', 'Status')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('foreign_key', __d('bechlem_connect_light', 'Foreign key')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('name', __d('bechlem_connect_light', 'Name')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('slug', __d('bechlem_connect_light', 'Slug')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('parent_id', __d('bechlem_connect_light', 'Parent')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('lft', __d('bechlem_connect_light', 'Left')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('rght', __d('bechlem_connect_light', 'Right')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('locale', __d('bechlem_connect_light', 'Locale')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('status', __d('bechlem_connect_light', 'Status')); ?></strong></small></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -216,6 +215,7 @@ $this->Breadcrumbs->add([
                             <td><?= h($productCategory->locale); ?></td>
                             <td><?= $this->BechlemConnectLight->status(h($productCategory->status)); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?= $this->Html->link(
                                     $this->Html->icon('eye'),
                                     [
@@ -260,22 +260,18 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escape'        => false,
                                     ]); ?>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
-
             <?= $this->element('paginator'); ?>
-
         </div>
     </div>
 </div>
-
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();

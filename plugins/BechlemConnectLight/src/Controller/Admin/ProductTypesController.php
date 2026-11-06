@@ -32,6 +32,7 @@ use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
 use Cake\I18n\DateTime;
 use Cake\Utility\Hash;
+use Cake\Utility\Text;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -78,7 +79,7 @@ class ProductTypesController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -114,7 +115,7 @@ class ProductTypesController extends AppController
      * @param int|null $id
      * @return void
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $productType = $this->ProductTypes->get($id, contain: [
             'ProductTypeAttributes' => function ($q) {
@@ -181,7 +182,7 @@ class ProductTypesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $productType = $this->ProductTypes->get($id, contain: ['ProductTypeAttributes']);
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
@@ -232,7 +233,7 @@ class ProductTypesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $productType = $this->ProductTypes->get($id);
@@ -267,6 +268,8 @@ class ProductTypesController extends AppController
      */
     public function import()
     {
+        $session = $this->getRequest()->getSession();
+
         if ($this->getRequest()->is('post') || !empty($this->getRequest()->getData())) {
 
             $postData = $this->getRequest()->getData();
@@ -336,8 +339,11 @@ class ProductTypesController extends AppController
                             Hash::merge(
                                 $productType,
                                 [
-                                    'created' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
-                                    'modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'uuid_id'       => Text::uuid(),
+                                    'created'       => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'created_by'    => $session->read('Auth.User.id'),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );
@@ -350,7 +356,10 @@ class ProductTypesController extends AppController
                             $existent,
                             Hash::merge(
                                 $productType,
-                                ['modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss')]
+                                [
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
+                                ]
                             )
                         );
                         if ($this->ProductTypes->save($productType)) {

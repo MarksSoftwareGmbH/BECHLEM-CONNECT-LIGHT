@@ -24,12 +24,12 @@ declare(strict_types=1);
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-use Migrations\AbstractMigration;
+use Migrations\BaseMigration;
 
 /**
  * Class InitialBechlemConnectRequests
  */
-class InitialBechlemConnectRequests extends AbstractMigration
+class InitialBechlemConnectRequests extends BaseMigration
 {
     /**
      * You can specify a autoId property in the Migration class and set it to false,
@@ -70,7 +70,7 @@ class InitialBechlemConnectRequests extends AbstractMigration
             ->addColumn('method', 'string', ['limit' => 255])
             ->addColumn('url', 'string', ['limit' => 255])
             ->addColumn('data', 'text', ['null' => true])
-            ->addColumn('language', 'string', ['limit' => 255])
+            ->addColumn('language', 'string', ['limit' => 255, 'null' => true])
             ->addColumn('options', 'text', ['null' => true])
             ->addColumn('description', 'text', ['null' => true])
             ->addColumn('example', 'text', ['null' => true])

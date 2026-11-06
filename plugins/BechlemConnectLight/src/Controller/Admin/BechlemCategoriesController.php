@@ -51,6 +51,7 @@ class BechlemCategoriesController extends AppController
         'sortableFields' => [
             'id',
             'id_category',
+            'uuid_id',
             'name',
             'language',
             'created',
@@ -81,12 +82,12 @@ class BechlemCategoriesController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $bechlemCategory = $this->BechlemCategories->get($id);
 
         BechlemConnectLight::dispatchEvent('Controller.Admin.BechlemCategories.beforeViewRender', $this, [
-            'BechlemCategory' => $bechlemCategory
+            'BechlemCategory'   => $bechlemCategory,
         ]);
 
         $this->set('bechlemCategory', $bechlemCategory);
@@ -134,6 +135,7 @@ class BechlemCategoriesController extends AppController
             $bechlemCategoryArray = [];
             $bechlemCategoryArray['id'] = $bechlemCategory->id;
             $bechlemCategoryArray['id_category'] = $bechlemCategory->id_category;
+            $bechlemCategoryArray['uuid_id'] = $bechlemCategory->uuid_id;
             $bechlemCategoryArray['name'] = $bechlemCategory->name;
             $bechlemCategoryArray['language'] = $bechlemCategory->language;
             $bechlemCategoryArray['created'] = empty($bechlemCategory->created)? NULL: $bechlemCategory->created->i18nFormat('yyyy-MM-dd HH:mm:ss');

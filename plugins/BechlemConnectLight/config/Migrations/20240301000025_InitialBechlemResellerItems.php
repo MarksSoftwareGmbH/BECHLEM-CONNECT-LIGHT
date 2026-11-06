@@ -24,12 +24,12 @@ declare(strict_types=1);
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-use Migrations\AbstractMigration;
+use Migrations\BaseMigration;
 
 /**
  * Class InitialBechlemResellerItems
  */
-class InitialBechlemResellerItems extends AbstractMigration
+class InitialBechlemResellerItems extends BaseMigration
 {
     /**
      * You can specify a autoId property in the Migration class and set it to false,
@@ -63,10 +63,10 @@ class InitialBechlemResellerItems extends AbstractMigration
         $table = $this->table($tableName, ['id' => false, 'primary_key' => ['id']]);
         $table
             ->addColumn('id', 'integer', ['signed' => false, 'identity' => true])
-            ->addColumn('uuid_id', 'uuid', ['null' => true])
             ->addColumn('id_art_nr', 'string', ['limit' => 255, 'null' => true])
             ->addColumn('id_reseller', 'string', ['limit' => 255, 'null' => true])
             ->addColumn('id_item', 'string', ['limit' => 255, 'null' => true])
+            ->addColumn('uuid_id', 'uuid', ['null' => true])
             ->addColumn('ean', 'string', ['limit' => 255, 'null' => true])
             ->addColumn('oem_nr', 'string', ['limit' => 255, 'null' => true])
             ->addColumn('description', 'string', ['limit' => 255, 'null' => true])

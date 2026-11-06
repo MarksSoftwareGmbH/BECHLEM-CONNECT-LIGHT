@@ -50,12 +50,16 @@ class BechlemPrinterToSuppliesController extends AppController
         'maxLimit' => 50,
         'sortableFields' => [
             'id',
+            'uuid_id',
             'id_item_printer',
             'id_item_supply',
             'created',
             'modified',
         ],
-        'order' => ['name' => 'ASC']
+        'order' => [
+            'id_item_printer' => 'ASC',
+            'id_item_supply' => 'ASC',
+        ],
     ];
 
     /**
@@ -80,7 +84,7 @@ class BechlemPrinterToSuppliesController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $bechlemPrinterToSupply = $this->BechlemPrinterToSupplies->get($id);
 
@@ -132,6 +136,7 @@ class BechlemPrinterToSuppliesController extends AppController
         foreach($bechlemPrinterToSupplies as $bechlemPrinterToSupply) {
             $bechlemPrinterToSupplyArray = [];
             $bechlemPrinterToSupplyArray['id'] = $bechlemPrinterToSupply->id;
+            $bechlemPrinterToSupplyArray['uuid_id'] = $bechlemPrinterToSupply->uuid_id;
             $bechlemPrinterToSupplyArray['id_item_printer'] = $bechlemPrinterToSupply->id_item_printer;
             $bechlemPrinterToSupplyArray['id_item_supply'] = $bechlemPrinterToSupply->id_item_supply;
             $bechlemPrinterToSupplyArray['created'] = empty($bechlemPrinterToSupply->created)? NULL: $bechlemPrinterToSupply->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
@@ -251,6 +256,7 @@ class BechlemPrinterToSuppliesController extends AppController
         $header = $this->BechlemPrinterToSupplies->tableColumns;
         $extract = [
             'id',
+            'uuid_id',
             'id_item_printer',
             'id_item_supply',
             function ($row) {
@@ -289,6 +295,7 @@ class BechlemPrinterToSuppliesController extends AppController
         foreach($bechlemPrinterToSupplies as $bechlemPrinterToSupply) {
             $bechlemPrinterToSupplyArray = [];
             $bechlemPrinterToSupplyArray['id'] = $bechlemPrinterToSupply->id;
+            $bechlemPrinterToSupplyArray['uuid_id'] = $bechlemPrinterToSupply->uuid_id;
             $bechlemPrinterToSupplyArray['id_item_printer'] = $bechlemPrinterToSupply->id_item_printer;
             $bechlemPrinterToSupplyArray['id_item_supply'] = $bechlemPrinterToSupply->id_item_supply;
             $bechlemPrinterToSupplyArray['created'] = empty($bechlemPrinterToSupply->created)? NULL: $bechlemPrinterToSupply->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
@@ -320,6 +327,7 @@ class BechlemPrinterToSuppliesController extends AppController
         foreach($bechlemPrinterToSupplies as $bechlemPrinterToSupply) {
             $bechlemPrinterToSupplyArray = [];
             $bechlemPrinterToSupplyArray['id'] = $bechlemPrinterToSupply->id;
+            $bechlemPrinterToSupplyArray['uuid_id'] = $bechlemPrinterToSupply->uuid_id;
             $bechlemPrinterToSupplyArray['id_item_printer'] = $bechlemPrinterToSupply->id_item_printer;
             $bechlemPrinterToSupplyArray['id_item_supply'] = $bechlemPrinterToSupply->id_item_supply;
             $bechlemPrinterToSupplyArray['created'] = empty($bechlemPrinterToSupply->created)? NULL: $bechlemPrinterToSupply->created->i18nFormat('yyyy-MM-dd HH:mm:ss');

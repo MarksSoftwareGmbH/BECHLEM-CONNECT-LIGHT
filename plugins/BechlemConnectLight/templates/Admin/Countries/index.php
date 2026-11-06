@@ -33,13 +33,22 @@ if (Configure::check('BechlemConnectLight.settings.backendButtonColor')):
     $backendButtonColor = Configure::read('BechlemConnectLight.settings.backendButtonColor');
 endif;
 
+$backendLinkTextColor = 'navy';
+if (Configure::check('BechlemConnectLight.settings.backendLinkTextColor')):
+    $backendLinkTextColor = Configure::read('BechlemConnectLight.settings.backendLinkTextColor');
+endif;
+
 // Title
 $this->assign('title', $this->BechlemConnectLight->readCamel($this->getRequest()->getParam('controller'))
     . ' :: '
     . ucfirst($this->BechlemConnectLight->readCamel($this->getRequest()->getParam('action')))
 );
 // Breadcrumb
-$this->Breadcrumbs->add([
+$this->Breadcrumbs->addMany([
+    [
+        'title' => __d('bechlem_connect_light', 'Go back'),
+        'url' => 'javascript:history.back()',
+    ],
     [
         'title' => __d('bechlem_connect_light', 'Dashboard'),
         'url' => [
@@ -49,7 +58,7 @@ $this->Breadcrumbs->add([
         ]
     ],
     ['title' => $this->BechlemConnectLight->readCamel($this->getRequest()->getParam('controller'))]
-]); ?>
+], ['class' => 'breadcrumb-item']); ?>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -66,8 +75,8 @@ $this->Breadcrumbs->add([
                     'value'         => $this->getRequest()->getQuery('search'),
                     'label'         => false,
                     'placeholder'   => __d('bechlem_connect_light', 'Search') . '...',
-                    'prepend'       => $this->element('Countries' . DS . 'add_country')
-                    . $this->element('Countries' . DS . 'add_search_locale', ['locales' => !empty($locales)? $locales: []]),
+                    'prepend'       => $this->element('Countries/add_country')
+                    . $this->element('Countries/add_search_locale', ['locales' => !empty($locales)? $locales: []]),
                     'append' => $this->Form->button(
                             __d('bechlem_connect_light', 'Filter'),
                             ['class' => 'btn btn-' . h($backendButtonColor)]
@@ -96,7 +105,7 @@ $this->Breadcrumbs->add([
                             [
                                 'class'         => 'btn btn-' . h($backendButtonColor),
                                 'escapeTitle'   => false,
-                                'title'         => __d('bechlem_connect_light', 'Upload & import csv'),
+                                'title'         => __d('bechlem_connect_light', 'Upload & import CSV'),
                             ]
                         )
                         . ' '
@@ -170,29 +179,26 @@ $this->Breadcrumbs->add([
                         . '</div>'
                         . '</div>',
                 ]); ?>
-                </div>
                 <?= $this->Form->end(); ?>
             </div>
 
             <div class="card-body table-responsive">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('foreign_key', __d('bechlem_connect_light', 'Foreign key')); ?></th>
-                        <th><?= $this->Paginator->sort('name', __d('bechlem_connect_light', 'Name')); ?></th>
-                        <th><?= $this->Paginator->sort('slug', __d('bechlem_connect_light', 'Slug')); ?></th>
-                        <th><?= $this->Paginator->sort('code', __d('bechlem_connect_light', 'Code')); ?></th>
-                        <th><?= $this->Paginator->sort('info', __d('bechlem_connect_light', 'Info')); ?></th>
-                        <th><?= $this->Paginator->sort('locale', __d('bechlem_connect_light', 'Locale')); ?></th>
-                        <th><?= $this->Paginator->sort('locale_translation', __d('bechlem_connect_light', 'Translation')); ?></th>
-                        <th><?= $this->Paginator->sort('status', __d('bechlem_connect_light', 'Status')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('name', __d('bechlem_connect_light', 'Name')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('slug', __d('bechlem_connect_light', 'Slug')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('code', __d('bechlem_connect_light', 'Code')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('info', __d('bechlem_connect_light', 'Info')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('locale', __d('bechlem_connect_light', 'Locale')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('locale_translation', __d('bechlem_connect_light', 'Translation')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('status', __d('bechlem_connect_light', 'Status')); ?></strong></small></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php foreach ($countries as $country): ?>
                         <tr>
-                            <td><?= h($country->foreign_key); ?></td>
                             <td><?= $country->name; ?></td>
                             <td><?= h($country->slug); ?></td>
                             <td><?= h($country->code); ?></td>
@@ -208,6 +214,7 @@ $this->Breadcrumbs->add([
                             <td><?= h($country->locale_translation); ?></td>
                             <td><?= $this->BechlemConnectLight->status(h($country->status)); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?= $this->Html->link(
                                     $this->Html->icon('eye'),
                                     [
@@ -252,6 +259,7 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escapeTitle'   => false,
                                     ]); ?>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -263,9 +271,7 @@ $this->Breadcrumbs->add([
     </div>
 </div>
 
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();

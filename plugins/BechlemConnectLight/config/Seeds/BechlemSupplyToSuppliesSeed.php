@@ -25,12 +25,12 @@ declare(strict_types=1);
  * SOFTWARE.
  */
 use Cake\I18n\DateTime;
-use Migrations\AbstractSeed;
+use Migrations\BaseSeed;
 
 /**
  * BechlemSupplyToSupplies seed.
  */
-class BechlemSupplyToSuppliesSeed extends AbstractSeed
+class BechlemSupplyToSuppliesSeed extends BaseSeed
 {
     /**
      * Run Method.

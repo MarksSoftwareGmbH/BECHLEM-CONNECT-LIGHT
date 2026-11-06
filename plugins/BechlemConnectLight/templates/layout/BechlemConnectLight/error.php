@@ -68,25 +68,24 @@ endif;
         <?= $this->Html->charset(); ?>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport">
-        <?= $this->Html->meta('favicon.ico', DS . 'BechlemConnectLight' . DS . 'img' . DS . 'admin' . DS . 'favicons' . DS . 'favicon.ico', ['type' => 'icon']); ?>
+        <?= $this->Html->meta('favicon.ico', '/bechlem_connect_light/img/admin/favicons/favicon.ico', ['type' => 'icon']); ?>
         <?= $this->fetch('meta'); ?>
         <link rel="canonical" href="<?= $this->Url->build(); ?>" />
         <?= $this->Html->css([
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'fontawesome-free' . DS . 'css' . DS . 'all.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'ionicons' . DS . '2.0.1' . DS . 'css' . DS . 'ionicons.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'tempusdominus-bootstrap-4' . DS . 'css' . DS . 'tempusdominus-bootstrap-4.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'icheck-bootstrap' . DS . 'icheck-bootstrap.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jqvmap' . DS . 'jqvmap.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'adminlte.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'overlayScrollbars' . DS . 'css' . DS . 'OverlayScrollbars.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'daterangepicker' . DS . 'daterangepicker',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'summernote' . DS . 'summernote-bs4',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'fonts',
+            // 1. Original-Dateien dynamisch aus vendor/almasaeed2010/adminlte/
+            'BechlemConnectLight./adminlte/plugins/fontawesome-free/css/all.min',
+            'BechlemConnectLight./adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min',
+            'BechlemConnectLight./adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min',
+            'BechlemConnectLight./adminlte/plugins/jqvmap/jqvmap.min',
+            'BechlemConnectLight./adminlte/dist/css/adminlte.min',
+            'BechlemConnectLight./adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min',
+            'BechlemConnectLight./adminlte/plugins/daterangepicker/daterangepicker',
+            'BechlemConnectLight./adminlte/plugins/summernote/summernote-bs4',
+            // 2. Overrides in plugins/BechlemConnectLight/webroot/css/admin/
+            'BechlemConnectLight.admin/fonts',
         ]); ?>
         <?php if ($session->check('Auth.User.id')): ?>
-            <?= $this->Html->css([
-                'BechlemConnectLight' . '.' . 'admin' . DS . 'bechlem_connect_light.admin'
-            ]); ?>
+            <?= $this->Html->css(['BechlemConnectLight' . '.' . 'admin' . DS . 'bechlem_connect_light.admin']); ?>
         <?php endif; ?>
         <?= $this->fetch('css'); ?>
         <?= $this->fetch('script'); ?>
@@ -97,21 +96,25 @@ endif;
             <?= $this->element('error_content'); ?>
             <?= $this->element('footer'); ?>
         </div>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery' . DS . 'jquery.min', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-ui' . DS . 'jquery-ui.min', ['block' => 'scripts']); ?>
+        <?= $this->Html->script([
+            'BechlemConnectLight./adminlte/plugins/jquery/jquery.min',
+            'BechlemConnectLight./adminlte/plugins/jquery-ui/jquery-ui.min'
+        ], ['block' => 'scripts']); ?>
         <?= $this->Html->scriptBlock("$.widget.bridge('uibutton', $.ui.button)", ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'bootstrap' . DS . 'js' . DS . 'bootstrap.bundle.min', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-validation' . DS . 'jquery.validate.min', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-validation' . DS . 'additional-methods.min', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jqvmap' . DS . 'jquery.vmap.min', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jqvmap' . DS . 'maps' . DS . 'jquery.vmap.world', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-knob' . DS . 'jquery.knob.min', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'moment' . DS . 'moment.min', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'daterangepicker' . DS . 'daterangepicker', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'tempusdominus-bootstrap-4' . DS . 'js' . DS . 'tempusdominus-bootstrap-4.min', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'summernote' . DS . 'summernote-bs4.min', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'overlayScrollbars' . DS . 'js' . DS . 'jquery.overlayScrollbars.min', ['block' => 'scripts']); ?>
-        <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'adminlte.min', ['block' => 'scripts']); ?>
+        <?= $this->Html->script([
+            'BechlemConnectLight./adminlte/plugins/bootstrap/js/bootstrap.bundle.min',
+            'BechlemConnectLight./adminlte/plugins/jquery-validation/jquery.validate.min',
+            'BechlemConnectLight./adminlte/plugins/jquery-validation/additional-methods.min',
+            'BechlemConnectLight./adminlte/plugins/jqvmap/jquery.vmap.min',
+            'BechlemConnectLight./adminlte/plugins/jqvmap/maps/jquery.vmap.world',
+            'BechlemConnectLight./adminlte/plugins/jquery-knob/jquery.knob.min',
+            'BechlemConnectLight./adminlte/plugins/moment/moment.min',
+            'BechlemConnectLight./adminlte/plugins/daterangepicker/daterangepicker',
+            'BechlemConnectLight./adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min',
+            'BechlemConnectLight./adminlte/plugins/summernote/summernote-bs4.min',
+            'BechlemConnectLight./adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min',
+            'BechlemConnectLight./adminlte/dist/js/adminlte.min',
+        ], ['block' => 'scripts']); ?>
         <?= $this->fetch('scripts'); ?>
         <?= $this->fetch('scriptBottom'); ?>
     </body>

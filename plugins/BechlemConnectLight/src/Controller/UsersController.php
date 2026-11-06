@@ -57,7 +57,7 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -184,7 +184,7 @@ class UsersController extends AppController
                     ['element' => 'default', 'params' => ['class' => 'success']]
                 );
 
-                return $this->redirect($this->Auth->redirectUrl());
+                return $this->redirect('/admin/dashboard');
             } else {
                 $event = BechlemConnectLight::dispatchEvent('Controller.Users.onLoginFailure', $this, []);
                 if ($event->isStopped()) {
@@ -307,7 +307,7 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function reset(string $username = null, string $token = null)
+    public function reset(?string $username = null, ?string $token = null)
     {
         // Get session object
         $session = $this->getRequest()->getSession();

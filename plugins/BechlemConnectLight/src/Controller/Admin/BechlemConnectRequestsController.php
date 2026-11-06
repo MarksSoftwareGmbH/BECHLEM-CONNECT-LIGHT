@@ -31,7 +31,9 @@ use BechlemConnectLight\Utility\BechlemConnectLight;
 use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
 use Cake\I18n\DateTime;
+use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
+use Cake\Utility\Text;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -61,6 +63,7 @@ class BechlemConnectRequestsController extends AppController
         'sortableFields' => [
             'id',
             'bechlem_connect_config_id',
+            'uuid_id',
             'name',
             'slug',
             'method',
@@ -87,7 +90,7 @@ class BechlemConnectRequestsController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -139,7 +142,7 @@ class BechlemConnectRequestsController extends AppController
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function run(int $id = null)
+    public function run(?int $id = null)
     {
         $bechlemConnectRequest = $this->BechlemConnectRequests->get($id, contain: ['BechlemConnectConfigs']);
         BechlemConnectLight::dispatchEvent('Controller.Admin.BechlemConnectRequests.beforeRun', $this, [
@@ -173,15 +176,21 @@ class BechlemConnectRequestsController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $bechlemConnectRequest = $this->BechlemConnectRequests->get($id, contain: ['BechlemConnectConfigs']);
 
+        $Users = TableRegistry::getTableLocator()->get('BechlemConnectLight.Users');
+        $users = $Users
+            ->find('list', order: ['Users.name' => 'ASC'], keyField: 'id', valueField: 'name_username_email')
+            ->toArray();
+
         BechlemConnectLight::dispatchEvent('Controller.Admin.BechlemConnectRequests.beforeViewRender', $this, [
-            'BechlemConnectRequest' => $bechlemConnectRequest
+            'BechlemConnectRequest' => $bechlemConnectRequest,
+            'Users'                 => $users,
         ]);
 
-        $this->set('bechlemConnectRequest', $bechlemConnectRequest);
+        $this->set(compact('bechlemConnectRequest', 'users'));
     }
 
     /**
@@ -244,7 +253,7 @@ class BechlemConnectRequestsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $bechlemConnectRequest = $this->BechlemConnectRequests->get($id, contain: ['BechlemConnectConfigs']);
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
@@ -299,7 +308,7 @@ class BechlemConnectRequestsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function copy(int $id = null)
+    public function copy(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post']);
 
@@ -334,7 +343,7 @@ class BechlemConnectRequestsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $bechlemConnectRequest = $this->BechlemConnectRequests->get($id);
@@ -368,6 +377,8 @@ class BechlemConnectRequestsController extends AppController
      */
     public function import()
     {
+        $session = $this->getRequest()->getSession();
+
         if ($this->getRequest()->is('post') || !empty($this->getRequest()->getData())) {
 
             $postData = $this->getRequest()->getData();
@@ -441,8 +452,11 @@ class BechlemConnectRequestsController extends AppController
                             Hash::merge(
                                 $request,
                                 [
-                                    'created' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
-                                    'modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'uuid_id'       => Text::uuid(),
+                                    'created'       => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'created_by'    => $session->read('Auth.User.id'),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );
@@ -455,7 +469,10 @@ class BechlemConnectRequestsController extends AppController
                             $existent,
                             Hash::merge(
                                 $request,
-                                ['modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss')]
+                                [
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
+                                ]
                             )
                         );
                         if ($this->BechlemConnectRequests->save($request)) {
@@ -498,6 +515,7 @@ class BechlemConnectRequestsController extends AppController
             $bechlemConnectRequestArray = [];
             $bechlemConnectRequestArray['id'] = $bechlemConnectRequest->id;
             $bechlemConnectRequestArray['bechlem_connect_config_id'] = $bechlemConnectRequest->bechlem_connect_config_id;
+            $bechlemConnectRequestArray['uuid_id'] = $bechlemConnectRequest->uuid_id;
             $bechlemConnectRequestArray['name'] = $bechlemConnectRequest->name;
             $bechlemConnectRequestArray['slug'] = $bechlemConnectRequest->slug;
             $bechlemConnectRequestArray['method'] = $bechlemConnectRequest->method;
@@ -627,6 +645,7 @@ class BechlemConnectRequestsController extends AppController
         $extract = [
             'id',
             'bechlem_connect_config_id',
+            'uuid_id',
             'name',
             'slug',
             'method',
@@ -679,6 +698,7 @@ class BechlemConnectRequestsController extends AppController
             $bechlemConnectRequestArray = [];
             $bechlemConnectRequestArray['id'] = $bechlemConnectRequest->id;
             $bechlemConnectRequestArray['bechlem_connect_config_id'] = $bechlemConnectRequest->bechlem_connect_config_id;
+            $bechlemConnectRequestArray['uuid_id'] = $bechlemConnectRequest->uuid_id;
             $bechlemConnectRequestArray['name'] = $bechlemConnectRequest->name;
             $bechlemConnectRequestArray['slug'] = $bechlemConnectRequest->slug;
             $bechlemConnectRequestArray['method'] = $bechlemConnectRequest->method;
@@ -720,6 +740,7 @@ class BechlemConnectRequestsController extends AppController
             $bechlemConnectRequestArray = [];
             $bechlemConnectRequestArray['id'] = $bechlemConnectRequest->id;
             $bechlemConnectRequestArray['bechlem_connect_config_id'] = $bechlemConnectRequest->bechlem_connect_config_id;
+            $bechlemConnectRequestArray['uuid_id'] = $bechlemConnectRequest->uuid_id;
             $bechlemConnectRequestArray['name'] = $bechlemConnectRequest->name;
             $bechlemConnectRequestArray['slug'] = $bechlemConnectRequest->slug;
             $bechlemConnectRequestArray['method'] = $bechlemConnectRequest->method;

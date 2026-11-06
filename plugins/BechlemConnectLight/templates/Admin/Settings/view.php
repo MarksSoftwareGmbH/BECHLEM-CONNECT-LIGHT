@@ -133,8 +133,12 @@ $this->Breadcrumbs->add([
                     <dd class="col-sm-9"><?= empty($setting->title)? '-': h($setting->title); ?></dd>
                     <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Created'); ?></dt>
                     <dd class="col-sm-9"><?= empty($setting->created)? '-': h($setting->created->format('d.m.Y H:i:s')); ?></dd>
+                    <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Created by'); ?></dt>
+                    <dd class="col-sm-9"><?= !empty($users)? $users[h($setting->created_by)]: h($setting->created_by); ?></dd>
                     <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Modified'); ?></dt>
                     <dd class="col-sm-9"><?= empty($setting->modified)? '-': h($setting->modified->format('d.m.Y H:i:s')); ?></dd>
+                    <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Modified by'); ?></dt>
+                    <dd class="col-sm-9"><?= !empty($users)? $users[h($setting->modified_by)]: h($setting->modified_by); ?></dd>
                 </dl>
                 <hr />
                 <dl>
@@ -213,7 +217,5 @@ $this->Breadcrumbs->add([
     </div>
 </div>
 
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/prism/prism.min'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/prism/prism.min', ['block' => 'scriptBottom']); ?>

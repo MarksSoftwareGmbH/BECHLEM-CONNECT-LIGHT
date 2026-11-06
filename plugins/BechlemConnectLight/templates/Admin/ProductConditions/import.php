@@ -131,9 +131,7 @@ $this->Breadcrumbs->add([
 <?= $this->Form->end(); ?>
 
 <?= $this->element('please_wait'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'productConditions' . DS . 'form',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/productConditions/form', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         ProductConditions.init();

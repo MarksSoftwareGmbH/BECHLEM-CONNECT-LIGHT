@@ -182,16 +182,15 @@ $this->Breadcrumbs->add([
                 ]); ?>
                 <?= $this->Form->end(); ?>
             </div>
-
             <div class="card-body table-responsive">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('foreign_key', __d('bechlem_connect_light', 'Foreign key')); ?></th>
-                        <th><?= $this->Paginator->sort('title', __d('bechlem_connect_light', 'Title')); ?></th>
-                        <th><?= $this->Paginator->sort('alias', __d('bechlem_connect_light', 'Alias')); ?></th>
-                        <th><?= $this->Paginator->sort('tax', __d('bechlem_connect_light', 'Tax')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('foreign_key', __d('bechlem_connect_light', 'Foreign key')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('title', __d('bechlem_connect_light', 'Title')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('alias', __d('bechlem_connect_light', 'Alias')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('tax', __d('bechlem_connect_light', 'Tax')); ?></strong></small></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -202,6 +201,7 @@ $this->Breadcrumbs->add([
                             <td><?= h($productTaxClass->alias); ?></td>
                             <td><?= $this->Number->toPercentage($productTaxClass->tax, 4); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?= $this->Html->link(
                                     $this->Html->icon('eye'),
                                     [
@@ -246,22 +246,18 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escape'        => false,
                                     ]); ?>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
-
             <?= $this->element('paginator'); ?>
-
         </div>
     </div>
 </div>
-
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();

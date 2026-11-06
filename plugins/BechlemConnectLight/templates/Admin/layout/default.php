@@ -68,25 +68,24 @@ endif;
         <?= $this->Html->charset(); ?>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport">
-        <?= $this->Html->meta('favicon.ico', DS . 'BechlemConnectLight' . DS . 'img' . DS . 'admin' . DS . 'favicons' . DS . 'favicon.ico', ['type' => 'icon']); ?>
+        <?= $this->Html->meta('favicon.ico', '/bechlem_connect_light/img/admin/favicons/favicon.ico', ['type' => 'icon']); ?>
         <?= $this->fetch('meta'); ?>
         <link rel="canonical" href="<?= $this->Url->build(); ?>" />
         <?= $this->Html->css([
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'fontawesome-free' . DS . 'css' . DS . 'all.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'ionicons' . DS . '2.0.1' . DS . 'css' . DS . 'ionicons.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'tempusdominus-bootstrap-4' . DS . 'css' . DS . 'tempusdominus-bootstrap-4.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'icheck-bootstrap' . DS . 'icheck-bootstrap.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jqvmap' . DS . 'jqvmap.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'adminlte.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'overlayScrollbars' . DS . 'css' . DS . 'OverlayScrollbars.min',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'daterangepicker' . DS . 'daterangepicker',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'summernote' . DS . 'summernote-bs4',
-            'BechlemConnectLight' . '.' . 'admin' . DS . 'fonts',
+            // 1. Original-Dateien dynamisch aus vendor/almasaeed2010/adminlte/
+            'BechlemConnectLight./adminlte/plugins/fontawesome-free/css/all.min',
+            'BechlemConnectLight./adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min',
+            'BechlemConnectLight./adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min',
+            'BechlemConnectLight./adminlte/plugins/jqvmap/jqvmap.min',
+            'BechlemConnectLight./adminlte/dist/css/adminlte.min',
+            'BechlemConnectLight./adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min',
+            'BechlemConnectLight./adminlte/plugins/daterangepicker/daterangepicker',
+            'BechlemConnectLight./adminlte/plugins/summernote/summernote-bs4.min',
+            // 2. Overrides in plugins/BechlemConnectLight/webroot/css/admin/
+            'BechlemConnectLight.admin/fonts',
         ]); ?>
         <?php if ($session->check('Auth.User.id')): ?>
-            <?= $this->Html->css([
-                'BechlemConnectLight' . '.' . 'admin' . DS . 'bechlem_connect_light.admin'
-            ]); ?>
+            <?= $this->Html->css(['BechlemConnectLight.admin/bechlem_connect_light.admin']); ?>
         <?php endif; ?>
         <?= $this->fetch('css'); ?>
         <?= $this->fetch('script'); ?>

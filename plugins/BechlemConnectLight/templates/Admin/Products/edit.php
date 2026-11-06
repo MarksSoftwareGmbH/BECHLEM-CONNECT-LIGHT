@@ -382,19 +382,13 @@ $this->Breadcrumbs->add([
 </div>
 <?= $this->Form->end(); ?>
 
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'select2' . DS . 'css' . DS . 'select2.min'); ?>
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'bechlem_connect_light.select2'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'select2' . DS . 'js' . DS . 'select2.full.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'bootstrap4-duallistbox' . DS . 'bootstrap-duallistbox.min'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'bootstrap4-duallistbox' . DS . 'jquery.bootstrap-duallistbox.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datetimepicker' . DS . 'jquery.datetimepicker'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datetimepicker' . DS . 'build' . DS . 'jquery.datetimepicker.full.min',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/select2/css/select2.min'); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/bechlem_connect_light.select2'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/select2/js/select2.full.min', ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/bootstrap4-duallistbox/bootstrap-duallistbox.min'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min', ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/datetimepicker/jquery.datetimepicker'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/datetimepicker/build/jquery.datetimepicker.full.min', ['block' => 'scriptBottom']); ?>
 
 <?php $ckeditorScript = ''; ?>
 <?php foreach ($product->product_type->product_type_attributes as $key => $productTypeAttribute): ?>

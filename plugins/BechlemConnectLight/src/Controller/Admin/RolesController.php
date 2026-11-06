@@ -31,6 +31,7 @@ use BechlemConnectLight\Utility\BechlemConnectLight;
 use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
 use Cake\I18n\DateTime;
+use Cake\ORM\TableRegistry;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -76,7 +77,7 @@ class RolesController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -107,7 +108,7 @@ class RolesController extends AppController
      * @param int|null $id
      * @return void
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $role = $this->Roles->get($id, contain: [
             'Users' => function ($q) {
@@ -115,11 +116,17 @@ class RolesController extends AppController
             }
         ]);
 
+        $Users = TableRegistry::getTableLocator()->get('BechlemConnectLight.Users');
+        $users = $Users
+            ->find('list', order: ['Users.name' => 'ASC'], keyField: 'id', valueField: 'name_username_email')
+            ->toArray();
+
         BechlemConnectLight::dispatchEvent('Controller.Admin.Roles.beforeViewRender', $this, [
-            'Role' => $role,
+            'Role'  => $role,
+            'Users' => $users,
         ]);
 
-        $this->set('role', $role);
+        $this->set(compact('role', 'users'));
     }
 
     /**
@@ -173,7 +180,7 @@ class RolesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $role = $this->Roles->get($id, contain: [
             'Users' => function ($q) {
@@ -223,7 +230,7 @@ class RolesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);

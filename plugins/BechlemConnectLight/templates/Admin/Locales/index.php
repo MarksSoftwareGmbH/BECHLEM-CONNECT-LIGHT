@@ -182,17 +182,16 @@ $this->Breadcrumbs->add([
                 ]); ?>
                 <?= $this->Form->end(); ?>
             </div>
-
             <div class="card-body table-responsive">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('name', __d('bechlem_connect_light', 'Name')); ?></th>
-                        <th><?= $this->Paginator->sort('native', __d('bechlem_connect_light', 'Native')); ?></th>
-                        <th><?= $this->Paginator->sort('code', __d('bechlem_connect_light', 'Code')); ?></th>
-                        <th><?= $this->Paginator->sort('weight', __d('bechlem_connect_light', 'Weight')); ?></th>
-                        <th><?= $this->Paginator->sort('status', __d('bechlem_connect_light', 'Status')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('name', __d('bechlem_connect_light', 'Name')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('native', __d('bechlem_connect_light', 'Native')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('code', __d('bechlem_connect_light', 'Code')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('weight', __d('bechlem_connect_light', 'Weight')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('status', __d('bechlem_connect_light', 'Status')); ?></strong></small></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -204,6 +203,7 @@ $this->Breadcrumbs->add([
                             <td><?= $this->Number->format($locale->weight); ?></td>
                             <td><?= $this->BechlemConnectLight->status(h($locale->status)); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?= $this->Html->link(
                                     $this->Html->icon('eye'),
                                     [
@@ -248,6 +248,7 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escapeTitle'   => false,
                                     ]); ?>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -258,10 +259,7 @@ $this->Breadcrumbs->add([
         </div>
     </div>
 </div>
-
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();

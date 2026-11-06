@@ -84,7 +84,7 @@ class BechlemBrandsController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $bechlemBrand = $this->BechlemBrands->get($id);
 
@@ -137,6 +137,7 @@ class BechlemBrandsController extends AppController
             $bechlemBrandArray = [];
             $bechlemBrandArray['id'] = $bechlemBrand->id;
             $bechlemBrandArray['id_brand'] = $bechlemBrand->id_brand;
+            $bechlemBrandArray['uuid_id'] = $bechlemBrand->uuid_id;
             $bechlemBrandArray['name'] = $bechlemBrand->name;
             $bechlemBrandArray['upper_name'] = $bechlemBrand->upper_name;
             $bechlemBrandArray['id_par_brand'] = $bechlemBrand->id_par_brand;

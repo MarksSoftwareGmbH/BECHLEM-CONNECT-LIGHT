@@ -227,8 +227,12 @@ $this->Breadcrumbs->add([
                     <dd class="col-sm-9"><?= empty($registration->ip)? '-': h($registration->ip); ?></dd>
                     <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Created'); ?></dt>
                     <dd class="col-sm-9"><?= empty($registration->created)? '-': h($registration->created->format('d.m.Y H:i:s')); ?></dd>
+                    <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Created by'); ?></dt>
+                    <dd class="col-sm-9"><?= !empty($users)? $users[h($registration->created_by)]: h($registration->created_by); ?></dd>
                     <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Modified'); ?></dt>
                     <dd class="col-sm-9"><?= empty($registration->modified)? '-': h($registration->modified->format('d.m.Y H:i:s')); ?></dd>
+                    <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Modified by'); ?></dt>
+                    <dd class="col-sm-9"><?= !empty($users)? $users[h($registration->modified_by)]: h($registration->modified_by); ?></dd>
                 </dl>
                 <hr/>
                 <dl>

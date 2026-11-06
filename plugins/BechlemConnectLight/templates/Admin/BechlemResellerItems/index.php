@@ -173,17 +173,17 @@ $this->Breadcrumbs->add([
                 <?= $this->fetch('postLink'); ?>
             </div>
             <div class="card-body table-responsive">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('id_art_nr', __d('bechlem_connect_light', 'Id art nr')); ?></th>
-                        <th><?= $this->Paginator->sort('id_reseller', __d('bechlem_connect_light', 'Id reseller')); ?></th>
-                        <th><?= $this->Paginator->sort('id_item', __d('bechlem_connect_light', 'Id item')); ?></th>
-                        <th><?= $this->Paginator->sort('ean', __d('bechlem_connect_light', 'EAN')); ?></th>
-                        <th><?= $this->Paginator->sort('oem_nr', __d('bechlem_connect_light', 'OEM nr')); ?></th>
-                        <th><?= $this->Paginator->sort('language', __d('bechlem_connect_light', 'Language')); ?></th>
-                        <th><?= $this->Paginator->sort('modified', __d('bechlem_connect_light', 'Modified')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('id_art_nr', __d('bechlem_connect_light', 'Id art nr')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('id_reseller', __d('bechlem_connect_light', 'Id reseller')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('id_item', __d('bechlem_connect_light', 'Id item')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('ean', __d('bechlem_connect_light', 'EAN')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('oem_nr', __d('bechlem_connect_light', 'OEM nr')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('language', __d('bechlem_connect_light', 'Language')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('modified', __d('bechlem_connect_light', 'Modified')); ?></strong></small></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -257,6 +257,7 @@ $this->Breadcrumbs->add([
                             <td><?= h($bechlemResellerItem->language); ?></td>
                             <td><?= h($bechlemResellerItem->modified->format('d.m.Y H:i:s')); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?= $this->Html->link(
                                     $this->Html->icon('eye'),
                                     [
@@ -270,6 +271,7 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escape'        => false,
                                     ]); ?>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -280,19 +282,11 @@ $this->Breadcrumbs->add([
         </div>
     </div>
 </div>
-
 <?= $this->element('please_wait'); ?>
-
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();
-    });',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->scriptBlock(
-    '$(function() {
         $(\'.run\').on(\'click\', function () {
             $(\'#pleaseWait\').modal(\'show\');
         });

@@ -104,14 +104,16 @@ class BechlemSuppliesTable extends Table
         ]);
 
         // Setup search filter using search manager
-        $this->searchManager()
+        $this->getBehavior('Search')->searchManager()
             ->add('search', 'Search.Like', [
-                'before'        => true,
-                'after'         => true,
-                'fieldMode'     => 'OR',
-                'comparison'    => 'LIKE',
-                'wildcardAny'   => '*',
-                'wildcardOne'   => '?',
+                'multiValue' => true,
+                'multiValueSeparator' => ' ',
+                'before' => true,
+                'after' => true,
+                'fieldMode' => 'OR',
+                'comparison' => 'LIKE',
+                'wildcardAny' => '*',
+                'wildcardOne' => '?',
                 'fields' => [
                     'id_item',
                     'id_brand',
@@ -286,7 +288,7 @@ class BechlemSuppliesTable extends Table
      * 
      * @return bool
      */
-    public function updateSupplies(object $controller = null)
+    public function updateSupplies(?object $controller = null)
     {
         ini_set('memory_limit', '2048M');
         ini_set('max_execution_time', '900');

@@ -32,6 +32,7 @@ use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
 use Cake\I18n\DateTime;
 use Cake\Utility\Hash;
+use Cake\Utility\Text;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -78,7 +79,7 @@ class ProductConditionsController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -109,7 +110,7 @@ class ProductConditionsController extends AppController
      * @param int|null $id
      * @return void
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $productCondition = $this->ProductConditions->get($id);
 
@@ -168,7 +169,7 @@ class ProductConditionsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $productCondition = $this->ProductConditions->get($id);
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
@@ -214,7 +215,7 @@ class ProductConditionsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $productCondition = $this->ProductConditions->get($id);
@@ -249,6 +250,8 @@ class ProductConditionsController extends AppController
      */
     public function import()
     {
+        $session = $this->getRequest()->getSession();
+
         if ($this->getRequest()->is('post') || !empty($this->getRequest()->getData())) {
 
             $postData = $this->getRequest()->getData();
@@ -318,8 +321,11 @@ class ProductConditionsController extends AppController
                             Hash::merge(
                                 $productCondition,
                                 [
-                                    'created' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
-                                    'modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'uuid_id'       => Text::uuid(),
+                                    'created'       => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'created_by'    => $session->read('Auth.User.id'),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );
@@ -332,7 +338,10 @@ class ProductConditionsController extends AppController
                             $existent,
                             Hash::merge(
                                 $productCondition,
-                                ['modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss')]
+                                [
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
+                                ]
                             )
                         );
                         if ($this->ProductConditions->save($productCondition)) {

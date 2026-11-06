@@ -226,13 +226,13 @@
                                                                     <strong>Bechlem Connect Light</strong><br />
                                                                     <br />
                                                                     by Marks Software GmbH<br />
-                                                                    Holunderweg 20<br />
-                                                                    D-29664 Walsrode<br />
+                                                                    Brock 6<br />
+                                                                    29683 Bad Fallingbostel<br />
                                                                     Germany<br />
                                                                 </p>
                                                                 <br />
                                                                 <p class="footer">
-                                                                    <?= __d('bechlem_connect_light', 'Telephone'); ?>: <a href="tel:+4951617875356" title="+49 51 61 78 75 356" moz-do-not-send="true">+49 51 61 78 75 356</a><br />
+                                                                    <?= __d('bechlem_connect_light', 'Telephone'); ?>: <a href="tel:+4915150662819" title="+49 151 50 66 28 19" moz-do-not-send="true">+49 151 50 66 28 19</a><br />
                                                                     <?= __d('bechlem_connect_light', 'Email'); ?>: <a href="mailto:info@marks-software.de" title="Bechlem Connect Light" moz-do-not-send="true">info@marks-software.de</a>
                                                                 </p>
                                                                 <br />

@@ -85,8 +85,10 @@ class BechlemCategoriesTable extends Table
         $this->addBehavior('BechlemConnectLight.Deletable');
 
         // Setup search filter using search manager
-        $this->searchManager()
+        $this->getBehavior('Search')->searchManager()
             ->add('search', 'Search.Like', [
+                'multiValue' => true,
+                'multiValueSeparator' => ' ',
                 'before' => true,
                 'after' => true,
                 'fieldMode' => 'OR',
@@ -181,7 +183,7 @@ class BechlemCategoriesTable extends Table
      * 
      * @return bool
      */
-    public function updateCategories(object $controller = null)
+    public function updateCategories(?object $controller = null)
     {
         ini_set('memory_limit', '2048M');
         ini_set('max_execution_time', '900');

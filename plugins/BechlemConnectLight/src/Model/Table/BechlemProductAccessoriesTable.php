@@ -103,14 +103,16 @@ class BechlemProductAccessoriesTable extends Table
         ]);
 
         // Setup search filter using search manager
-        $this->searchManager()
+        $this->getBehavior('Search')->searchManager()
             ->add('search', 'Search.Like', [
-                'before'        => true,
-                'after'         => true,
-                'fieldMode'     => 'OR',
-                'comparison'    => 'LIKE',
-                'wildcardAny'   => '*',
-                'wildcardOne'   => '?',
+                'multiValue' => true,
+                'multiValueSeparator' => ' ',
+                'before' => true,
+                'after' => true,
+                'fieldMode' => 'OR',
+                'comparison' => 'LIKE',
+                'wildcardAny' => '*',
+                'wildcardOne' => '?',
                 'fields' => [
                     'bechlem_product_id',
                     'type',
@@ -198,7 +200,7 @@ class BechlemProductAccessoriesTable extends Table
      * 
      * @return bool
      */
-    public function updateProductAccessories(object $controller = null)
+    public function updateProductAccessories(?object $controller = null)
     {
         ini_set('memory_limit', '2048M');
         ini_set('max_execution_time', '900');

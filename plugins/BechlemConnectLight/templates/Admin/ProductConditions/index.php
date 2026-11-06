@@ -182,15 +182,14 @@ $this->Breadcrumbs->add([
                 ]); ?>
                 <?= $this->Form->end(); ?>
             </div>
-
             <div class="card-body table-responsive">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('foreign_key', __d('bechlem_connect_light', 'Foreign key')); ?></th>
-                        <th><?= $this->Paginator->sort('title', __d('bechlem_connect_light', 'Title')); ?></th>
-                        <th><?= $this->Paginator->sort('alias', __d('bechlem_connect_light', 'Alias')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('foreign_key', __d('bechlem_connect_light', 'Foreign key')); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('title', __d('bechlem_connect_light', 'Title')); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('alias', __d('bechlem_connect_light', 'Alias')); ?></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -200,6 +199,7 @@ $this->Breadcrumbs->add([
                             <td><?= h($productCondition->title); ?></td>
                             <td><?= h($productCondition->alias); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?= $this->Html->link(
                                     $this->Html->icon('eye'),
                                     [
@@ -244,22 +244,18 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escape'        => false,
                                     ]); ?>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
-
             <?= $this->element('paginator'); ?>
-
         </div>
     </div>
 </div>
-
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();

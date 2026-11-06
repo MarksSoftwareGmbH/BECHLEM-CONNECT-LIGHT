@@ -403,9 +403,7 @@ $this->Breadcrumbs->add([
     <?php $bechlemProductTypesChartData .= '' . h($bechlemProductType->type_product_count) . ','; ?>
 <?php endforeach; ?>
 
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'chart.js' . DS . 'Chart.min.js',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script(['BechlemConnectLight./adminlte/plugins/chart.js/Chart.min.js'], ['block' => 'scripts']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         var ticksStyle = {

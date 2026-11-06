@@ -1,5 +1,11 @@
 # BECHLEM-CONNECT-LIGHT
 
+[![Packagist Version](https://img.shields.io/packagist/v/marks-software-gmbh/bechlem-connect-light.svg?style=flat-square)](https://packagist.org/packages/marks-software-gmbh/bechlem-connect-light)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/marks-software-gmbh/bechlem-connect-light.svg?style=flat-square)](https://packagist.org/packages/marks-software-gmbh/bechlem-connect-light)
+[![PHP Version](https://img.shields.io/badge/php-%3E%3D8.2-8892BF.svg?style=flat-square)](https://www.php.net/)
+[![CakePHP Version](https://img.shields.io/badge/CakePHP-5.4-D33C43.svg?style=flat-square)](https://cakephp.org/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
+
 **Bechlem Connect Light** is a free, open source, middlewrae and product content management system for PHP 8 based on CakePHP 5, CakePHP vendor plugins, the AdminLTE bootstrap admin dashboard template and released under the [MIT License](https://github.com/MarksSoftwareGmbH/BECHLEM-CONNECT-LIGHT/blob/main/LICENSE).
 
 It is powered by the [CakePHP](http://cakephp.org) 5 PHP framework.
@@ -11,9 +17,30 @@ It is powered by the [CakePHP](http://cakephp.org) 5 PHP framework.
 
 ## Installation
 
+1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
+2. Run `php composer.phar create-project --prefer-dist marks-software-gmbh/bechlem-connect-light [app_name]`.
+
+If Composer is installed globally, run
+
+```bash
+composer create-project --prefer-dist marks-software-gmbh/bechlem-connect-light
+```
+
+In case you want to use a custom app dir name (e.g. `/myapp/`):
+
+```bash
+composer create-project --prefer-dist marks-software-gmbh/yab-cms-ff my-bechlem-connect
+```
+
+Then configure your database in `config/app_local.php` or use the default Sqlite Setup and visit the site.
+
+#### Default login: Admin / superadmin (change immediately).
+
+**Important:** Change the default credentials immediately after the first login.
+
 #### Installation using GitHub [Clone](https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories)
 
-The preferred way to install BECHLEM-CONNECT-LIGHT is by using HTTP
+Alternative: Installation using GitHub Clone
 
     https://github.com/MarksSoftwareGmbH/BECHLEM-CONNECT-LIGHT.git
     
@@ -61,12 +88,15 @@ When the composer update is finished
   * **Mark Scherer - TinyAuth Plugin**: [dereuromark/cakephp-tinyauth](https://github.com/dereuromark/cakephp-tinyauth)
   * **PHP - JWT**: [firebase/php-jwt](https://github.com/firebase/php-jwt)
   * **Friends Of Cake - Bootstrap UI**: [friendsofcake/bootstrap-ui](https://github.com/friendsofcake/bootstrap-ui)
+  * **Friends Of Cake - CakePdf Plugin**: [friendsofcake/cakepdf](https://github.com/friendsofcake/cakepdf)
   * **Friends Of Cake - CsvView Plugin**: [friendsofcake/cakephp-csvview](https://github.com/friendsofcake/cakephp-csvview)
   * **Friends Of Cake - CRUD Plugin**: [friendsofcake/crud](https://github.com/friendsofcake/crud)
   * **Friends Of Cake - Search Plugin**: [friendsofcake/search](https://github.com/friendsofcake/search)
   * **Intervention - PHP Image Processing**: [intervention/image](https://github.com/intervention/image)
   * **PHPOffice - PhpSpreadsheet**: [phpoffice/phpspreadsheet](https://github.com/phpoffice/phpspreadsheet)
   * **PHPOffice - PhpWord**: [phpoffice/phpword](https://github.com/phpoffice/phpword)
+  * **Tecnick.com LTD - TCPDF**: [tecnickcom/tcpdf](https://github.com/tecnickcom/tcpdf)
+  * **Colorlib (Aigars Silkalns) - AdminLTE**: [almasaeed2010/adminlte](https://github.com/ColorlibHQ/AdminLTE)
 
 ## Suggested vendor plugins you should install via composer
 
@@ -81,4 +111,4 @@ When the composer update is finished
 ## Links
 
   * **Marks Software GmbH website**: [https://www.marks-software.de](https://www.marks-software.de)
-  * **Marks Software GmbH on X / Twitter**: [https://twitter.com/SoftwareMarks](https://twitter.com/SoftwareMarks)
+  * **Marks Software GmbH on X**: [https://x.com/SoftwareMarks](https://x.com/SoftwareMarks)

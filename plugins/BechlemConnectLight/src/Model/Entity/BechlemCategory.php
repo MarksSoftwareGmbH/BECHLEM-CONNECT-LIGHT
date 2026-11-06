@@ -33,6 +33,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string|null $id_category
+ * @property string|null $uuid_id
  * @property string|null $name
  * @property string|null $language
  * @property \Cake\I18n\Time $created

@@ -33,6 +33,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string|null $id_brand
+ * @property string|null $uuid_id
  * @property string|null $name
  * @property string|null $upper_name
  * @property string|null $id_par_brand

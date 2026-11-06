@@ -104,14 +104,6 @@ $this->Breadcrumbs->add([
         <h1>
             <?= __d('bechlem_connect_light', 'REST API documentation'); ?>
             <?= $this->Html->link(
-                $this->Html->tag('i', '', ['class' => 'fas fa-file-pdf']),
-                '/admin/rest-api-documentation-pdf',
-                [
-                    'target'    => '_self',
-                    'title'     => __d('bechlem_connect_light', 'Download as PDF'),
-                    'escape'    => false,
-                ]); ?>
-            <?= $this->Html->link(
                 $this->Html->tag('i', '', ['class' => 'fas fa-print']),
                 '#',
                 [
@@ -2706,10 +2698,8 @@ print(data.decode("utf-8"))
     </div>
 </div>
 
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/prism/prism.min'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/prism/prism.min', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         let printLink = document.getElementById(\'printRestApiDocumentation\');

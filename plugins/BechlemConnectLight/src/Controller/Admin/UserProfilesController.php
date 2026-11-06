@@ -102,7 +102,7 @@ class UserProfilesController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -134,7 +134,7 @@ class UserProfilesController extends AppController
      * @param int|null $id
      * @return void
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $userProfile = $this->UserProfiles->get($id, contain: [
             'Users',
@@ -142,12 +142,13 @@ class UserProfilesController extends AppController
         ]);
 
         $Users = TableRegistry::getTableLocator()->get('BechlemConnectLight.Users');
-        $users = $Users->find('list', order: ['Users.name' => 'ASC'], keyField: 'id', valueField: 'name')
-        ->toArray();
+        $users = $Users
+            ->find('list', order: ['Users.name' => 'ASC'], keyField: 'id', valueField: 'name')
+            ->toArray();
 
         BechlemConnectLight::dispatchEvent('Controller.Admin.UserProfiles.beforeViewRender', $this, [
-            'UserProfile' => $userProfile,
-            'Users' => $users,
+            'UserProfile'   => $userProfile,
+            'Users'         => $users,
         ]);
 
         $this->set(compact('userProfile', 'users'));
@@ -273,7 +274,7 @@ class UserProfilesController extends AppController
      *
      * @return \Cake\Http\Response|void|null
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $userProfile = $this->UserProfiles->get($id, contain: ['Users']);
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
@@ -391,7 +392,7 @@ class UserProfilesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $userProfile = $this->UserProfiles->get($id);

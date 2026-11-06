@@ -236,18 +236,12 @@ $this->Breadcrumbs->add([
 </div>
 <?= $this->Form->end(); ?>
 
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'select2' . DS . 'css' . DS . 'select2.min'); ?>
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'bechlem_connect_light.select2'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'select2' . DS . 'js' . DS . 'select2.full.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'tagify' . DS . 'tagify'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'tagify' . DS . 'jQuery.tagify.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'userProfiles' . DS . 'form',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/select2/css/select2.min'); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/bechlem_connect_light.select2'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/select2/js/select2.full.min', ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/tagify/tagify'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/tagify/jQuery.tagify.min', ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/userProfiles/form', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         UserProfiles.init();

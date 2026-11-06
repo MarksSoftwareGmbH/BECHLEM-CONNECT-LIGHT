@@ -470,15 +470,9 @@ $routes->plugin('BechlemConnectLight', ['path' => '/'], function (RouteBuilder $
             $routes
                 ->connect('/application-documentation', ['controller' => 'Dashboards', 'action' => 'applicationDocumentation']);
             $routes
-                ->connect('/application-documentation-pdf', ['controller' => 'Dashboards', 'action' => 'applicationDocumentationPdf', '_ext' => 'pdf']);
-            $routes
                 ->connect('/mit-license-documentation', ['controller' => 'Dashboards', 'action' => 'mitLicenseDocumentation']);
             $routes
-                ->connect('/mit-license-documentation-pdf', ['controller' => 'Dashboards', 'action' => 'mitLicenseDocumentationPdf', '_ext' => 'pdf']);
-            $routes
                 ->connect('/rest-api-documentation', ['controller' => 'Dashboards', 'action' => 'restApiDocumentation']);
-            $routes
-                ->connect('/rest-api-documentation-pdf', ['controller' => 'Dashboards', 'action' => 'restApiDocumentationPdf', '_ext' => 'pdf']);
 
             /*
              * Domains Controller
@@ -1174,9 +1168,6 @@ $routes->plugin('BechlemConnectLight', ['path' => '/'], function (RouteBuilder $
         * Api Prefix Routing
         */
         $routes->prefix('Api', ['_namePrefix' => 'api:'], function (RouteBuilder $builder) {
-
-            $builder->registerMiddleware('auth', new \Authentication\Middleware\AuthenticationMiddleware($this));
-            $builder->applyMiddleware('auth');
 
             // Parse specified extensions from URLs
             $builder->setExtensions(['json', 'xml']);

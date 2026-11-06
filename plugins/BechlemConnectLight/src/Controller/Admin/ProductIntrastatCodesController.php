@@ -32,6 +32,7 @@ use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
 use Cake\I18n\DateTime;
 use Cake\Utility\Hash;
+use Cake\Utility\Text;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -78,7 +79,7 @@ class ProductIntrastatCodesController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -109,7 +110,7 @@ class ProductIntrastatCodesController extends AppController
      * @param int|null $id
      * @return void
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $productIntrastatCode = $this->ProductIntrastatCodes->get($id);
 
@@ -168,7 +169,7 @@ class ProductIntrastatCodesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $productIntrastatCode = $this->ProductIntrastatCodes->get($id);
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
@@ -214,7 +215,7 @@ class ProductIntrastatCodesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $productIntrastatCode = $this->ProductIntrastatCodes->get($id);
@@ -249,6 +250,8 @@ class ProductIntrastatCodesController extends AppController
      */
     public function import()
     {
+        $session = $this->getRequest()->getSession();
+
         if ($this->getRequest()->is('post') || !empty($this->getRequest()->getData())) {
 
             $postData = $this->getRequest()->getData();
@@ -315,8 +318,11 @@ class ProductIntrastatCodesController extends AppController
                             Hash::merge(
                                 $productIntrastatCode,
                                 [
-                                    'created' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
-                                    'modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'uuid_id'       => Text::uuid(),
+                                    'created'       => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'created_by'    => $session->read('Auth.User.id'),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );
@@ -329,7 +335,10 @@ class ProductIntrastatCodesController extends AppController
                             $existent,
                             Hash::merge(
                                 $productIntrastatCode,
-                                ['modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss')]
+                                [
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
+                                ]
                             )
                         );
                         if ($this->ProductIntrastatCodes->save($productIntrastatCode)) {

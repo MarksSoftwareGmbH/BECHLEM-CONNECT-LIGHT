@@ -1,4 +1,9 @@
 <?php
+
+use Cake\Database\Connection;
+use Cake\Database\Driver\Sqlite;
+use function Cake\Core\env;
+
 /*
  * Local configuration file to provide any overrides to your app.php configuration.
  * Copy and save this file as app_local.php and make changes as required.
@@ -36,28 +41,19 @@ return [
      */
     'Datasources' => [
         'default' => [
-            'host' => 'localhost',
-            /*
-             * CakePHP will use the default DB port based on the driver selected
-             * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
-             * the following line and set the port accordingly
-             */
-            //'port' => 'non_standard_port_number',
-
-            'username' => 'my_app',
-            'password' => 'secret',
-
-            'database' => 'my_app',
-            /*
-             * If not using the default 'public' schema with the PostgreSQL driver
-             * set it here.
-             */
-            //'schema' => 'myapp',
-
-            /*
-             * You can use a DSN string to set the entire configuration
-             */
-            'url' => env('DATABASE_URL', null),
+            'className'     => Connection::class,
+            'driver'        => Sqlite::class,
+            'database'      => ROOT . DS . 'data' . DS . 'bechlem_connect_light.db',
+            'encoding'      => 'utf8',
+            'cacheMetadata' => true,
+            'log'           => false,
+            // 'mask'          => 0640,
+            'init'          => [
+                'PRAGMA foreign_keys = ON',
+                'PRAGMA journal_mode = WAL',
+                'PRAGMA synchronous = NORMAL',
+                'PRAGMA busy_timeout = 5000;',
+            ],
         ],
 
         /*
@@ -71,6 +67,38 @@ return [
             'database' => 'test_myapp',
             //'schema' => 'myapp',
             'url' => env('DATABASE_TEST_URL', 'sqlite://127.0.0.1/tmp/tests.sqlite'),
+        ],
+
+        'development' => [
+            'className'     => Connection::class,
+            'driver'        => Sqlite::class,
+            'database'      => ROOT . DS . 'data' . DS . 'bechlem_connect_light.db',
+            'encoding'      => 'utf8',
+            'cacheMetadata' => true,
+            'log'           => false,
+            // 'mask'          => 0640,
+            'init'          => [
+                'PRAGMA foreign_keys = ON',
+                'PRAGMA journal_mode = WAL',
+                'PRAGMA synchronous = NORMAL',
+                'PRAGMA busy_timeout = 5000;',
+            ],
+        ],
+
+        'production' => [
+            'className'     => Connection::class,
+            'driver'        => Sqlite::class,
+            'database'      => ROOT . DS . 'data' . DS . 'bechlem_connect_light.db',
+            'encoding'      => 'utf8',
+            'cacheMetadata' => true,
+            'log'           => false,
+            // 'mask'          => 0640,
+            'init'          => [
+                'PRAGMA foreign_keys = ON',
+                'PRAGMA journal_mode = WAL',
+                'PRAGMA synchronous = NORMAL',
+                'PRAGMA busy_timeout = 5000;',
+            ],
         ],
     ],
 

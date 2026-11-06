@@ -58,17 +58,10 @@ switch ($class):
         $icon = 'fa fa-info';
 endswitch;
 
-echo $this->Html->css(['BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'animate' . DS . 'animate'])
-. $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'bootstrap-notify' . DS . 'bootstrap-notify.min',
-    ['block' => 'scriptBottom']
-)
-. $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'element' . DS . 'flash' . DS . 'default',
-    ['block' => 'scriptBottom']
-)
+echo $this->Html->css(['BechlemConnectLight.admin/vendor/animate/animate'])
+. $this->Html->script('BechlemConnectLight.admin/vendor/bootstrap-notify/bootstrap-notify.min', ['block' => 'scriptBottom'])
+. $this->Html->script('BechlemConnectLight.admin/template/element/flash/default', ['block' => 'scriptBottom'])
 . $this->Html->scriptBlock(
     '$(function() {
         FlashMessages.init(\'' . $icon . '\' ,\'' . $message . '\',\'' . $type . '\');
-    });',
-    ['block' => 'scriptBottom']);
+    });', ['block' => 'scriptBottom']);

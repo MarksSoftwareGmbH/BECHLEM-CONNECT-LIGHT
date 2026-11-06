@@ -42,7 +42,6 @@ use Psr\Log\LogLevel;
  */
 class BechlemConnectLightHelper extends Helper
 {
-
     /**
      * Helpers array
      *
@@ -68,10 +67,9 @@ class BechlemConnectLightHelper extends Helper
      * Read camel method
      *
      * @param string $camelcase
-     *
      * @return string
      */
-    public function readCamel(string $camelcase)
+    public function readCamel(string $camelcase): string
     {
         $regex = '/
               (?<=[a-z])
@@ -80,23 +78,26 @@ class BechlemConnectLightHelper extends Helper
               (?=[A-Z][a-z])
             /x';
         $split = preg_split($regex, $camelcase);
-        $readableCamelcase = implode(' ', $split);
-        return $readableCamelcase;
+        if ($split === false) {
+            return $camelcase;
+        }
+
+        return implode(' ', $split);
     }
 
     /**
      * Status method
      *
-     * @param $status
-     * @return mixed
+     * @param mixed $status
+     * @return string
      */
-    public function status($status)
+    public function status(mixed $status): string
     {
         $output = $this->Html->tag('span', __d('bechlem_connect_light', 'Inactive'), [
             'class'     => 'badge badge-danger',
             'escape'    => false,
         ]);
-        if ($status == 1 || $status == true || $status === 'true') {
+        if ($status == 1 || $status === true || $status === 'true') {
             $output = $this->Html->tag('span', __d('bechlem_connect_light', 'Active'), [
                 'class'     => 'badge badge-success',
                 'escape'    => false,
@@ -109,12 +110,12 @@ class BechlemConnectLightHelper extends Helper
     /**
      * Check method
      *
-     * @param $check
-     * @return mixed
+     * @param mixed $check
+     * @return string
      */
-    public function check($check)
+    public function check(mixed $check): string
     {
-        if ($check == 1 || $check == true || $check === 'true') {
+        if ($check == 1 || $check === true || $check === 'true') {
             $icon = $this->Html->tag('i', '', [
                 'class'     => 'fa fa-check',
                 'escape'    => false,
@@ -138,31 +139,29 @@ class BechlemConnectLightHelper extends Helper
      * Prefixes method
      *
      * @param string|null $key
-     * @return array|mixed
+     * @return array|string
      */
-    public function prefixes(string $key = null)
+    public function prefixes(?string $key = null): array|string
     {
         $prefixes = [
             'Dr.'           => __d('bechlem_connect_light', 'Dr.'),
             'Prof.'         => __d('bechlem_connect_light', 'Prof.'),
             'Prof. & Dr.'   => __d('bechlem_connect_light', 'Prof. & Dr.'),
         ];
-        if ($key) {
-            if (isset($prefixes[$key])) {
-                return $prefixes[$key];
-            }
+        if ($key !== null && isset($prefixes[$key])) {
+            return $prefixes[$key];
         }
 
         return $prefixes;
     }
 
     /**
-     * Saluations method
+     * Salutations method
      *
      * @param string|null $key
-     * @return array|mixed
+     * @return array|string
      */
-    public function salutations(string $key = null)
+    public function salutations(?string $key = null): array|string
     {
         $salutations = [
             'Mr.'           => __d('bechlem_connect_light', 'Mr.'),
@@ -172,10 +171,8 @@ class BechlemConnectLightHelper extends Helper
             'Mrs. & Dr.'    => __d('bechlem_connect_light', 'Mrs. & Dr.'),
             'Ms.'           => __d('bechlem_connect_light', 'Ms.'),
         ];
-        if ($key) {
-            if (isset($salutations[$key])) {
-                return $salutations[$key];
-            }
+        if ($key !== null && isset($salutations[$key])) {
+            return $salutations[$key];
         }
 
         return $salutations;
@@ -185,15 +182,13 @@ class BechlemConnectLightHelper extends Helper
      * Timezone method
      *
      * @param string|null $timezone
-     * @return array
+     * @return array|string
      */
-    public function timezone(string $timezone = null)
+    public function timezone(?string $timezone = null): array|string
     {
         $timezones = DateTime::listTimezones(null, null, ['group' => false]);
-        if ($timezone) {
-            if (isset($timezones[$timezone])) {
-                return $timezones[$timezone];
-            }
+        if ($timezone !== null && isset($timezones[$timezone])) {
+            return $timezones[$timezone];
         }
 
         return $timezones;
@@ -203,9 +198,9 @@ class BechlemConnectLightHelper extends Helper
      * Month method
      *
      * @param string|null $month
-     * @return mixed|null
+     * @return array|string|null
      */
-    public function month(string $month = null)
+    public function month(?string $month = null): array|string|null
     {
         $months = [
             'January'   => __d('bechlem_connect_light', 'January'),
@@ -221,22 +216,20 @@ class BechlemConnectLightHelper extends Helper
             'November'  => __d('bechlem_connect_light', 'November'),
             'December'  => __d('bechlem_connect_light', 'December'),
         ];
-        if ($month) {
-            if (isset($months[$month])) {
-                return $months[$month];
-            }
+        if ($month !== null) {
+            return $months[$month] ?? $month;
         }
 
-        return $month;
+        return $months;
     }
 
     /**
      * Input type method
      *
      * @param string|null $type
-     * @return mixed|null
+     * @return string|null
      */
-    public function inputType(string $type = null)
+    public function inputType(?string $type = null): ?string
     {
         $types = [
             'string'    => 'text',
@@ -248,15 +241,11 @@ class BechlemConnectLightHelper extends Helper
             'checkbox'  => 'checkbox',
             'radio'     => 'radio',
         ];
-        if ($type) {
-            if (isset($types[$type])) {
-                return $types[$type];
-            } else {
-                return $type;
-            }
-        } else {
-            return $type;
+        if ($type !== null) {
+            return $types[$type] ?? $type;
         }
+
+        return $type;
     }
 
     /**
@@ -264,7 +253,7 @@ class BechlemConnectLightHelper extends Helper
      *
      * @return array
      */
-    public function inputTypesList()
+    public function inputTypesList(): array
     {
         return [
             'string'    => 'String (Varchar / Decimal / Float)',
@@ -281,15 +270,17 @@ class BechlemConnectLightHelper extends Helper
     /**
      * Input options method
      *
-     * @param array|null $array
+     * @param iterable|null $array
      * @return array
      */
-    public function inputOptions(array $array = null)
+    public function inputOptions(?iterable $array = null): array
     {
         $options = [];
         if (!empty($array)) {
             foreach ($array as $option) {
-                $options[$option->value] = $option->value;
+                if (isset($option->value)) {
+                    $options[$option->value] = $option->value;
+                }
             }
         }
 
@@ -299,9 +290,9 @@ class BechlemConnectLightHelper extends Helper
     /**
      * Users method
      *
-     * @return object
+     * @return mixed
      */
-    public function users()
+    public function users(): mixed
     {
         $Users = TableRegistry::getTableLocator()->get('BechlemConnectLight.Users');
         return $Users
@@ -311,9 +302,9 @@ class BechlemConnectLightHelper extends Helper
     /**
      * Domains method
      *
-     * @return object
+     * @return mixed
      */
-    public function domains()
+    public function domains(): mixed
     {
         $Domains = TableRegistry::getTableLocator()->get('BechlemConnectLight.Domains');
         return $Domains
@@ -324,10 +315,9 @@ class BechlemConnectLightHelper extends Helper
      * Countries method
      *
      * @param string|null $key
-     *
-     * @return array|mixed
+     * @return array|string
      */
-    public function countries(string $key = null)
+    public function countries(?string $key = null): array|string
     {
         $Countries = TableRegistry::getTableLocator()->get('BechlemConnectLight.Countries');
         $countries = $Countries
@@ -338,12 +328,8 @@ class BechlemConnectLightHelper extends Helper
             ])
             ->toArray();
 
-        if ($key) {
-            if (array_key_exists($key, $countries)) {
-                return $countries[$key];
-            } else {
-                return $key;
-            }
+        if ($key !== null) {
+            return $countries[$key] ?? $key;
         }
 
         return $countries;
@@ -354,10 +340,9 @@ class BechlemConnectLightHelper extends Helper
      *
      * @param string $locale
      * @param string|null $key
-     *
-     * @return array|mixed
+     * @return array|string
      */
-    public function countriesByLocale(string $locale, string $key = null)
+    public function countriesByLocale(string $locale, ?string $key = null): array|string
     {
         $Countries = TableRegistry::getTableLocator()->get('BechlemConnectLight.Countries');
         $countries = $Countries
@@ -368,12 +353,8 @@ class BechlemConnectLightHelper extends Helper
             ])
             ->toArray();
 
-        if ($key) {
-            if (array_key_exists($key, $countries)) {
-                return $countries[$key];
-            } else {
-                return $key;
-            }
+        if ($key !== null) {
+            return $countries[$key] ?? $key;
         }
 
         return $countries;
@@ -383,10 +364,9 @@ class BechlemConnectLightHelper extends Helper
      * Countries list method
      *
      * @param int|null $id
-     *
-     * @return array|mixed
+     * @return array|int
      */
-    public function countriesList(int $id = null)
+    public function countriesList(?int $id = null): array|int
     {
         $Countries = TableRegistry::getTableLocator()->get('BechlemConnectLight.Countries');
         $countries = $Countries
@@ -397,12 +377,8 @@ class BechlemConnectLightHelper extends Helper
             ])
             ->toArray();
 
-        if ($id) {
-            if (array_key_exists($id, $countries)) {
-                return $countries[$id];
-            } else {
-                return $id;
-            }
+        if ($id !== null) {
+            return $countries[$id] ?? $id;
         }
 
         return $countries;
@@ -413,10 +389,9 @@ class BechlemConnectLightHelper extends Helper
      *
      * @param string $locale
      * @param int|null $id
-     *
-     * @return array|mixed
+     * @return array|int
      */
-    public function countriesListByLocale(string $locale, int $id = null)
+    public function countriesListByLocale(string $locale, ?int $id = null): array|int
     {
         $Countries = TableRegistry::getTableLocator()->get('BechlemConnectLight.Countries');
         $countries = $Countries
@@ -427,12 +402,8 @@ class BechlemConnectLightHelper extends Helper
             ])
             ->toArray();
 
-        if ($id) {
-            if (array_key_exists($id, $countries)) {
-                return $countries[$id];
-            } else {
-                return $id;
-            }
+        if ($id !== null) {
+            return $countries[$id] ?? $id;
         }
 
         return $countries;
@@ -442,22 +413,17 @@ class BechlemConnectLightHelper extends Helper
      * Registration types method
      *
      * @param int|null $key
-     *
-     * @return array|mixed
+     * @return array|int
      */
-    public function registrationTypes(int $key = null)
+    public function registrationTypes(?int $key = null): array|int
     {
         $RegistrationTypes = TableRegistry::getTableLocator()->get('BechlemConnectLight.RegistrationTypes');
         $registrationTypes = $RegistrationTypes
             ->find('list', order: ['RegistrationTypes.title' => 'ASC'], keyField: 'id', valueField: 'title')
             ->toArray();
 
-        if ($key) {
-            if (array_key_exists($key, $registrationTypes)) {
-                return $registrationTypes[$key];
-            } else {
-                return $key;
-            }
+        if ($key !== null) {
+            return $registrationTypes[$key] ?? $key;
         }
 
         return $registrationTypes;
@@ -467,10 +433,9 @@ class BechlemConnectLightHelper extends Helper
      * Locales id name list method
      *
      * @param string|null $code
-     *
-     * @return array|mixed
+     * @return array|string
      */
-    public function localesIdNameList(string $code = null)
+    public function localesIdNameList(?string $code = null): array|string
     {
         $Locales = TableRegistry::getTableLocator()->get('BechlemConnectLight.Locales');
         $locales = $Locales
@@ -479,12 +444,8 @@ class BechlemConnectLightHelper extends Helper
             ->orderBy(['Locales.weight' => 'ASC'])
             ->toArray();
 
-        if ($code) {
-            if (array_key_exists($code, $locales)) {
-                return $locales[$code];
-            } else {
-                return $code;
-            }
+        if ($code !== null) {
+            return $locales[$code] ?? $code;
         }
 
         return $locales;
@@ -494,10 +455,9 @@ class BechlemConnectLightHelper extends Helper
      * Locale code name list method
      *
      * @param string|null $code
-     *
-     * @return array|mixed
+     * @return array|string
      */
-    public function localeCodeNameList(string $code = null)
+    public function localeCodeNameList(?string $code = null): array|string
     {
         $Locales = TableRegistry::getTableLocator()->get('BechlemConnectLight.Locales');
         $locales = $Locales
@@ -506,12 +466,8 @@ class BechlemConnectLightHelper extends Helper
             ->orderBy(['Locales.weight' => 'ASC'])
             ->toArray();
 
-        if ($code) {
-            if (array_key_exists($code, $locales)) {
-                return $locales[$code];
-            } else {
-                return $code;
-            }
+        if ($code !== null) {
+            return $locales[$code] ?? $code;
         }
 
         return $locales;
@@ -521,10 +477,9 @@ class BechlemConnectLightHelper extends Helper
      * Locale short code native list method
      *
      * @param string|null $shortCode
-     *
-     * @return array|mixed
+     * @return array|string
      */
-    public function localeShortCodeNativeList(string $shortCode = null)
+    public function localeShortCodeNativeList(?string $shortCode = null): array|string
     {
         $shortCodeNativeList = [];
 
@@ -540,12 +495,8 @@ class BechlemConnectLightHelper extends Helper
             }
         }
 
-        if ($shortCode) {
-            if (array_key_exists($shortCode, $shortCodeNativeList)) {
-                return $shortCodeNativeList[$shortCode];
-            } else {
-                return $shortCode;
-            }
+        if ($shortCode !== null) {
+            return $shortCodeNativeList[$shortCode] ?? $shortCode;
         }
 
         return $shortCodeNativeList;
@@ -557,7 +508,7 @@ class BechlemConnectLightHelper extends Helper
      * @param string|null $code
      * @return string|null
      */
-    public function localeCode(string $code = null)
+    public function localeCode(?string $code = null): ?string
     {
         $Locales = TableRegistry::getTableLocator()->get('BechlemConnectLight.Locales');
         $locales = $Locales
@@ -566,10 +517,8 @@ class BechlemConnectLightHelper extends Helper
             ->orderBy(['Locales.weight' => 'ASC'])
             ->toArray();
 
-        if ($code) {
-            if (array_key_exists($code, $locales)) {
-                return $locales[$code];
-            }
+        if ($code !== null && isset($locales[$code])) {
+            return $locales[$code];
         }
 
         return $code;
@@ -579,10 +528,9 @@ class BechlemConnectLightHelper extends Helper
      * Http scheme types method
      *
      * @param string|null $key
-     *
-     * @return array|mixed
+     * @return array|string
      */
-    public function httpSchemeTypes(string $key = null)
+    public function httpSchemeTypes(?string $key = null): array|string
     {
         $types = [
             'http'  => 'http',
@@ -590,12 +538,8 @@ class BechlemConnectLightHelper extends Helper
             'ftp'   => 'ftp',
             'ftps'  => 'ftps',
         ];
-        if ($key) {
-            if (array_key_exists($key, $types)) {
-                return $types[$key];
-            } else {
-                return $key;
-            }
+        if ($key !== null) {
+            return $types[$key] ?? $key;
         }
 
         return $types;
@@ -605,10 +549,9 @@ class BechlemConnectLightHelper extends Helper
      * Http request types method
      *
      * @param string|null $key
-     *
-     * @return array|mixed
+     * @return array|string
      */
-    public function httpRequestTypes(string $key = null)
+    public function httpRequestTypes(?string $key = null): array|string
     {
         $types = [
             'GET'       => 'GET',
@@ -619,12 +562,8 @@ class BechlemConnectLightHelper extends Helper
             'HEAD'      => 'HEAD',
             'OPTIONS'   => 'OPTIONS',
         ];
-        if ($key) {
-            if (array_key_exists($key, $types)) {
-                return $types[$key];
-            } else {
-                return $key;
-            }
+        if ($key !== null) {
+            return $types[$key] ?? $key;
         }
 
         return $types;
@@ -634,10 +573,9 @@ class BechlemConnectLightHelper extends Helper
      * Http connect types method
      *
      * @param string|null $key
-     *
-     * @return array|mixed
+     * @return array|string
      */
-    public function httpConnectTypes(string $key = null)
+    public function httpConnectTypes(?string $key = null): array|string
     {
         $types = [
             'basic'         => 'Basic',
@@ -647,12 +585,8 @@ class BechlemConnectLightHelper extends Helper
             'oauth2bearer'  => 'OAuth 2.0 Bearer',
             'proxy'         => 'Proxy',
         ];
-        if ($key) {
-            if (array_key_exists($key, $types)) {
-                return $types[$key];
-            } else {
-                return $key;
-            }
+        if ($key !== null) {
+            return $types[$key] ?? $key;
         }
 
         return $types;
@@ -661,15 +595,14 @@ class BechlemConnectLightHelper extends Helper
     /**
      * Bechlem csd picture method
      *
-     * @param string|null $key
-     *
-     * @return array|mixed
+     * @param string|null $picture
+     * @return mixed
      */
-    public function bechlemCsdPicture(string $picture = null)
+    public function bechlemCsdPicture(?string $picture = null): mixed
     {
-        if (!empty($picture) && file_exists(ROOT . $this->bechlemConnectLightImgContentDir . h($picture) . '.' . 'jpg')) {
+        if (!empty($picture) && file_exists(ROOT . $this->bechlemConnectLightImgContentDir . h($picture) . '.jpg')) {
             $picture = $this->Html->image(
-                $this->bechlemConnectLightImgContentLink . DS . h($picture) . '.' . 'jpg',
+                $this->bechlemConnectLightImgContentLink . DS . h($picture) . '.jpg',
                 [
                     'alt'   => h($picture),
                     'style' => 'max-height: 32px;',
@@ -701,23 +634,25 @@ class BechlemConnectLightHelper extends Helper
             }
 
             try {
-                if (!empty($bechlemCsdPictureRequest->id)) {
-                    $bechlemCsdPictureRequest->options = 'nzpicture=' . h($picture) . '&' . 'format=' . 'jpg';
+                if (!empty($bechlemCsdPictureRequest?->id)) {
+                    $bechlemCsdPictureRequest->options = 'nzpicture=' . h($picture) . '&format=jpg';
                     $request = $bechlemCsdPictureRequest->bechlem_connect_config->scheme . '://'
                         . $bechlemCsdPictureRequest->bechlem_connect_config->host
-                        . $bechlemCsdPictureRequest->url . '?' . 'query='
-                        . 'getpicture' . '&'
+                        . $bechlemCsdPictureRequest->url . '?query=getpicture&'
                         . $bechlemCsdPictureRequest->options;
 
                     $http = new Client();
                     $response = $http->get($request, [], ['timeout' => 900]);
 
-                    $handle = fopen(ROOT . $this->bechlemConnectLightImgContentDir . h($picture) . '.' . 'jpg', 'w');
-                    fwrite($handle , $response->getStringBody());
-                    fclose($handle);
+                    $filePath = ROOT . $this->bechlemConnectLightImgContentDir . h($picture) . '.jpg';
+                    $handle = fopen($filePath, 'w');
+                    if ($handle !== false) {
+                        fwrite($handle, $response->getStringBody());
+                        fclose($handle);
+                    }
 
                     $picture = $this->Html->image(
-                        $this->bechlemConnectLightImgContentLink . DS . h($picture) . '.' . 'jpg',
+                        $this->bechlemConnectLightImgContentLink . DS . h($picture) . '.jpg',
                         [
                             'alt'   => h($picture),
                             'style' => 'max-height: 32px;',
@@ -737,15 +672,14 @@ class BechlemConnectLightHelper extends Helper
     /**
      * Bechlem csd picture card method
      *
-     * @param string|null $key
-     *
-     * @return array|mixed
+     * @param string|null $picture
+     * @return mixed
      */
-    public function bechlemCsdPictureCard(string $picture = null)
+    public function bechlemCsdPictureCard(?string $picture = null): mixed
     {
-        if (!empty($picture) && file_exists(ROOT . $this->bechlemConnectLightImgContentDir . h($picture) . '.' . 'jpg')) {
+        if (!empty($picture) && file_exists(ROOT . $this->bechlemConnectLightImgContentDir . h($picture) . '.jpg')) {
             $picture = $this->Html->image(
-                $this->bechlemConnectLightImgContentLink . DS . h($picture) . '.' . 'jpg',
+                $this->bechlemConnectLightImgContentLink . DS . h($picture) . '.jpg',
                 [
                     'alt'   => h($picture),
                     'class' => 'card-img-top',
@@ -776,23 +710,25 @@ class BechlemConnectLightHelper extends Helper
             }
 
             try {
-                if (!empty($bechlemCsdPictureRequest->id)) {
-                    $bechlemCsdPictureRequest->options = 'nzpicture=' . h($picture) . '&' . 'format=' . 'jpg';
+                if (!empty($bechlemCsdPictureRequest?->id)) {
+                    $bechlemCsdPictureRequest->options = 'nzpicture=' . h($picture) . '&format=jpg';
                     $request = $bechlemCsdPictureRequest->bechlem_connect_config->scheme . '://'
                         . $bechlemCsdPictureRequest->bechlem_connect_config->host
-                        . $bechlemCsdPictureRequest->url . '?' . 'query='
-                        . 'getpicture' . '&'
+                        . $bechlemCsdPictureRequest->url . '?query=getpicture&'
                         . $bechlemCsdPictureRequest->options;
 
                     $http = new Client();
                     $response = $http->get($request, [], ['timeout' => 900]);
 
-                    $handle = fopen(ROOT . $this->bechlemConnectLightImgContentDir . h($picture) . '.' . 'jpg', 'w');
-                    fwrite($handle , $response->getStringBody());
-                    fclose($handle);
+                    $filePath = ROOT . $this->bechlemConnectLightImgContentDir . h($picture) . '.jpg';
+                    $handle = fopen($filePath, 'w');
+                    if ($handle !== false) {
+                        fwrite($handle, $response->getStringBody());
+                        fclose($handle);
+                    }
 
                     $picture = $this->Html->image(
-                        $this->bechlemConnectLightImgContentLink . DS . h($picture) . '.' . 'jpg',
+                        $this->bechlemConnectLightImgContentLink . DS . h($picture) . '.jpg',
                         [
                             'alt'   => h($picture),
                             'class' => 'card-img-top',
@@ -812,10 +748,9 @@ class BechlemConnectLightHelper extends Helper
      * Product brand logo method
      *
      * @param object|null $productBrand
-     *
      * @return mixed
      */
-    public function productBrandLogo(object $productBrand = null)
+    public function productBrandLogo(?object $productBrand = null): mixed
     {
         $logo = $this->Html->image($this->bechlemConnectLightImgContentLink . DS . 'no_image_available.png', [
             'alt'   => __d('bechlem_connect_light', 'No image available'),
@@ -824,10 +759,9 @@ class BechlemConnectLightHelper extends Helper
         ]);
 
         if (
-            !empty($productBrand->logo) &&
-            (filter_var($productBrand->logo, FILTER_VALIDATE_URL) === FALSE)
+            !empty($productBrand?->logo) &&
+            (filter_var($productBrand->logo, FILTER_VALIDATE_URL) === false)
         ) {
-            // get the root path
             $dir = ROOT . $this->bechlemConnectLightImgContentDir . 'productBrands' . DS . 'logos' . DS;
             if (file_exists($dir . $productBrand->logo)) {
                 $logo = $this->Html->image(
@@ -835,19 +769,19 @@ class BechlemConnectLightHelper extends Helper
                     . DS . 'logos'
                     . DS . $productBrand->logo,
                     [
-                        'alt'   => h($productBrand->name),
+                        'alt'   => h($productBrand->name ?? ''),
                         'style' => 'max-height: 32px;',
                         'class' => 'img-responsive',
                     ]);
             }
         } elseif (
-            !empty($productBrand->logo) &&
-            (filter_var($productBrand->logo, FILTER_VALIDATE_URL) !== FALSE)
+            !empty($productBrand?->logo) &&
+            (filter_var($productBrand->logo, FILTER_VALIDATE_URL) !== false)
         ) {
             $logo = $this->Html->image(
                 $productBrand->logo,
                 [
-                    'alt'   => h($productBrand->name),
+                    'alt'   => h($productBrand->name ?? ''),
                     'style' => 'max-height: 32px;',
                     'class' => 'img-responsive',
                 ]);
@@ -860,10 +794,9 @@ class BechlemConnectLightHelper extends Helper
      * Product manufacturer logo method
      *
      * @param object $productManufacturer
-     *
      * @return mixed
      */
-    public function productManufacturerLogo(object $productManufacturer)
+    public function productManufacturerLogo(object $productManufacturer): mixed
     {
         $logo = $this->Html->image($this->bechlemConnectLightImgContentLink . DS . 'no_image_available.png', [
             'alt'   => __d('bechlem_connect_light', 'No image available'),
@@ -873,9 +806,8 @@ class BechlemConnectLightHelper extends Helper
 
         if (
             !empty($productManufacturer->logo) &&
-            (filter_var($productManufacturer->logo, FILTER_VALIDATE_URL) === FALSE)
+            (filter_var($productManufacturer->logo, FILTER_VALIDATE_URL) === false)
         ) {
-            // get the root path
             $dir = ROOT . $this->bechlemConnectLightImgContentDir . 'productManufacturers' . DS . 'logos' . DS;
             if (file_exists($dir . $productManufacturer->logo)) {
                 $logo = $this->Html->image(
@@ -883,19 +815,19 @@ class BechlemConnectLightHelper extends Helper
                     . DS . 'logos'
                     . DS . $productManufacturer->logo,
                     [
-                        'alt'   => h($productManufacturer->name),
+                        'alt'   => h($productManufacturer->name ?? ''),
                         'style' => 'max-height: 32px;',
                         'class' => 'img-responsive',
                     ]);
             }
         } elseif (
             !empty($productManufacturer->logo) &&
-            (filter_var($productManufacturer->logo, FILTER_VALIDATE_URL) !== FALSE)
+            (filter_var($productManufacturer->logo, FILTER_VALIDATE_URL) !== false)
         ) {
             $logo = $this->Html->image(
                 $productManufacturer->logo,
                 [
-                    'alt'   => h($productManufacturer->name),
+                    'alt'   => h($productManufacturer->name ?? ''),
                     'style' => 'max-height: 32px;',
                     'class' => 'img-responsive',
                 ]);
@@ -908,10 +840,9 @@ class BechlemConnectLightHelper extends Helper
      * Product supplier logo method
      *
      * @param object|null $productSupplier
-     *
      * @return mixed
      */
-    public function productSupplierLogo(object $productSupplier = null)
+    public function productSupplierLogo(?object $productSupplier = null): mixed
     {
         $logo = $this->Html->image($this->bechlemConnectLightImgContentLink . DS . 'no_image_available.png', [
             'alt'   => __d('bechlem_connect_light', 'No image available'),
@@ -920,10 +851,9 @@ class BechlemConnectLightHelper extends Helper
         ]);
 
         if (
-            !empty($productSupplier->logo) &&
-            (filter_var($productSupplier->logo, FILTER_VALIDATE_URL) === FALSE)
+            !empty($productSupplier?->logo) &&
+            (filter_var($productSupplier->logo, FILTER_VALIDATE_URL) === false)
         ) {
-            // get the root path
             $dir = ROOT . $this->bechlemConnectLightImgContentDir . 'productSuppliers' . DS . 'logos' . DS;
             if (file_exists($dir . $productSupplier->logo)) {
                 $logo = $this->Html->image(
@@ -931,19 +861,19 @@ class BechlemConnectLightHelper extends Helper
                     . DS . 'logos'
                     . DS . $productSupplier->logo,
                     [
-                        'alt'   => h($productSupplier->name),
+                        'alt'   => h($productSupplier->name ?? ''),
                         'style' => 'max-height: 32px;',
                         'class' => 'img-responsive',
                     ]);
             }
         } elseif (
-            !empty($productSupplier->logo) &&
-            (filter_var($productSupplier->logo, FILTER_VALIDATE_URL) !== FALSE)
+            !empty($productSupplier?->logo) &&
+            (filter_var($productSupplier->logo, FILTER_VALIDATE_URL) !== false)
         ) {
             $logo = $this->Html->image(
                 $productSupplier->logo,
                 [
-                    'alt'   => h($productSupplier->name),
+                    'alt'   => h($productSupplier->name ?? ''),
                     'style' => 'max-height: 32px;',
                     'class' => 'img-responsive',
                 ]);
@@ -954,70 +884,66 @@ class BechlemConnectLightHelper extends Helper
 
     /**
      * Generates a strong password of N length containing at least one lower case letter,
-     * one uppercase letter, one digit, and one special character. The remaining characters
-     * in the password are chosen at random from those four sets.
-     *
-     * The available characters in each set are user friendly - there are no ambiguous
-     * characters such as i, l, 1, o, 0, etc. This, coupled with the $add_dashes option,
-     * makes it much easier for users to manually type or speak their passwords.
-     *
-     * Note: the $add_dashes option will increase the length of the password by floor(sqrt(N)) characters.
+     * one uppercase letter, one digit, and one special character.
      *
      * @param int $length
-     * @param false $add_dashes
-     * @param string $available_sets
-     *
+     * @param bool $addDashes
+     * @param string $availableSets
      * @return string
      */
-    public function generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds')
+    public function generateStrongPassword(int $length = 9, bool $addDashes = false, string $availableSets = 'luds'): string
     {
-        $sets = array();
-        if(strpos($available_sets, 'l') !== false)
+        $sets = [];
+        if (str_contains($availableSets, 'l')) {
             $sets[] = 'abcdefghjkmnpqrstuvwxyz';
-        if(strpos($available_sets, 'u') !== false)
+        }
+        if (str_contains($availableSets, 'u')) {
             $sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
-        if(strpos($available_sets, 'd') !== false)
+        }
+        if (str_contains($availableSets, 'd')) {
             $sets[] = '23456789';
-        if(strpos($available_sets, 's') !== false)
+        }
+        if (str_contains($availableSets, 's')) {
             $sets[] = '!@#$%&*?';
+        }
 
         $all = '';
         $password = '';
-        foreach($sets as $set)
-        {
-            $password .= $set[array_rand(str_split($set))];
+        foreach ($sets as $set) {
+            $chars = str_split($set);
+            $password .= $chars[array_rand($chars)];
             $all .= $set;
         }
 
-        $all = str_split($all);
-        for($i = 0; $i < $length - count($sets); $i++)
-            $password .= $all[array_rand($all)];
+        $allChars = str_split($all);
+        for ($i = 0; $i < $length - count($sets); $i++) {
+            $password .= $allChars[array_rand($allChars)];
+        }
 
         $password = str_shuffle($password);
 
-        if(!$add_dashes)
+        if (!$addDashes) {
             return $password;
-
-        $dash_len = floor(sqrt($length));
-        $dash_str = '';
-        while(strlen($password) > $dash_len)
-        {
-            $dash_str .= substr($password, 0, (int)$dash_len) . '-';
-            $password = substr($password, (int)$dash_len);
         }
-        $dash_str .= $password;
 
-        return $dash_str;
+        $dashLen = (int)floor(sqrt($length));
+        $dashStr = '';
+        while (strlen($password) > $dashLen) {
+            $dashStr .= substr($password, 0, $dashLen) . '-';
+            $password = substr($password, $dashLen);
+        }
+        $dashStr .= $password;
+
+        return $dashStr;
     }
 
     /**
      * Build slug method
      *
      * @param string $string
-     *
      * @return string
      */
-    public function buildSlug(string $string)
+    public function buildSlug(string $string): string
     {
         return Text::slug(
             strtolower($string),

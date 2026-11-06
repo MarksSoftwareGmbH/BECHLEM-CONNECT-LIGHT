@@ -28,7 +28,6 @@ namespace BechlemConnectLight\Controller\Admin;
 
 use BechlemConnectLight\Controller\Admin\AppController;
 use Cake\ORM\TableRegistry;
-use CakePdf\View\PdfView;
 
 /**
  * Dashboards Controller
@@ -47,20 +46,6 @@ class DashboardsController extends AppController
     public function initialize($loadComponents = true): void
     {
         parent::initialize(true);
-    }
-
-    /**
-     * Get the View classes this controller can perform content negotiation with.
-     *
-     * Each view class must implement the `getContentType()` hook method
-     * to participate in negotiation.
-     *
-     * @see \Cake\Http\ContentTypeNegotiation
-     * @return list<string>
-     */
-    public function viewClasses(): array
-    {
-        return [PdfView::class];
     }
 
     /**
@@ -204,45 +189,6 @@ class DashboardsController extends AppController
     }
 
     /**
-     * Application documentation pdf method
-     *
-     * @return void
-     */
-    public function applicationDocumentationPdf()
-    {
-        $bechlemConnectDemoData = 0;
-        $bechlemConnectConfigConnectData = [];
-
-        $BechlemConnectConfigs = TableRegistry::getTableLocator()->get('BechlemConnectLight.BechlemConnectConfigs');
-        $bechlemConnectConfig = $BechlemConnectConfigs
-            ->find()
-            ->where([
-                'BechlemConnectConfigs.alias'       => 'datawriter',
-                'BechlemConnectConfigs.username'    => 'www.datawriter.de',
-                'BechlemConnectConfigs.password'    => 'www.datawriter.de',
-                'BechlemConnectConfigs.status'      => 1,
-            ])
-            ->first();
-        if (!empty($bechlemConnectConfig->id)) {
-            $bechlemConnectDemoData = 1;
-            $bechlemConnectConfigConnectData = $bechlemConnectConfig;
-        }
-
-        $this->viewBuilder()->setOption(
-            'pdfConfig',
-            [
-                'orientation'   => 'portrait',
-                'filename'      => 'application_documentation',
-                'download'      => true,
-            ]
-        );
-        $this->set(compact(
-            'bechlemConnectDemoData',
-            'bechlemConnectConfigConnectData',
-        ));
-    }
-
-    /**
      * Mit license documentation method
      *
      * @return void
@@ -274,45 +220,6 @@ class DashboardsController extends AppController
     }
 
     /**
-     * Mit license documentation pdf method
-     *
-     * @return void
-     */
-    public function mitLicenseDocumentationPdf()
-    {
-        $bechlemConnectDemoData = 0;
-        $bechlemConnectConfigConnectData = [];
-
-        $BechlemConnectConfigs = TableRegistry::getTableLocator()->get('BechlemConnectLight.BechlemConnectConfigs');
-        $bechlemConnectConfig = $BechlemConnectConfigs
-            ->find()
-            ->where([
-                'BechlemConnectConfigs.alias'       => 'datawriter',
-                'BechlemConnectConfigs.username'    => 'www.datawriter.de',
-                'BechlemConnectConfigs.password'    => 'www.datawriter.de',
-                'BechlemConnectConfigs.status'      => 1,
-            ])
-            ->first();
-        if (!empty($bechlemConnectConfig->id)) {
-            $bechlemConnectDemoData = 1;
-            $bechlemConnectConfigConnectData = $bechlemConnectConfig;
-        }
-
-        $this->viewBuilder()->setOption(
-            'pdfConfig',
-            [
-                'orientation'   => 'portrait',
-                'filename'      => 'mit_license_documentation',
-                'download'      => true,
-            ]
-        );
-        $this->set(compact(
-            'bechlemConnectDemoData',
-            'bechlemConnectConfigConnectData',
-        ));
-    }
-
-    /**
      * Rest api documentation method
      *
      * @return void
@@ -337,45 +244,6 @@ class DashboardsController extends AppController
             $bechlemConnectConfigConnectData = $bechlemConnectConfig;
         }
 
-        $this->set(compact(
-            'bechlemConnectDemoData',
-            'bechlemConnectConfigConnectData',
-        ));
-    }
-
-    /**
-     * Rest api documentation pdf method
-     *
-     * @return void
-     */
-    public function restApiDocumentationPdf()
-    {
-        $bechlemConnectDemoData = 0;
-        $bechlemConnectConfigConnectData = [];
-
-        $BechlemConnectConfigs = TableRegistry::getTableLocator()->get('BechlemConnectLight.BechlemConnectConfigs');
-        $bechlemConnectConfig = $BechlemConnectConfigs
-            ->find()
-            ->where([
-                'BechlemConnectConfigs.alias'       => 'datawriter',
-                'BechlemConnectConfigs.username'    => 'www.datawriter.de',
-                'BechlemConnectConfigs.password'    => 'www.datawriter.de',
-                'BechlemConnectConfigs.status'      => 1,
-            ])
-            ->first();
-        if (!empty($bechlemConnectConfig->id)) {
-            $bechlemConnectDemoData = 1;
-            $bechlemConnectConfigConnectData = $bechlemConnectConfig;
-        }
-
-        $this->viewBuilder()->setOption(
-            'pdfConfig',
-            [
-                'orientation'   => 'portrait',
-                'filename'      => 'rest_api_documentation',
-                'download'      => true,
-            ]
-        );
         $this->set(compact(
             'bechlemConnectDemoData',
             'bechlemConnectConfigConnectData',

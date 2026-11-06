@@ -25,12 +25,12 @@ declare(strict_types=1);
  * SOFTWARE.
  */
 use Cake\I18n\DateTime;
-use Migrations\AbstractSeed;
+use Migrations\BaseSeed;
 
 /**
  * BechlemCategories seed.
  */
-class BechlemCategoriesSeed extends AbstractSeed
+class BechlemCategoriesSeed extends BaseSeed
 {
     /**
      * Run Method.

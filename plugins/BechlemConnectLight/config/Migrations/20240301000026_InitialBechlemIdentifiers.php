@@ -24,12 +24,12 @@ declare(strict_types=1);
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-use Migrations\AbstractMigration;
+use Migrations\BaseMigration;
 
 /**
  * Class InitialBechlemIdentifiers
  */
-class InitialBechlemIdentifiers extends AbstractMigration
+class InitialBechlemIdentifiers extends BaseMigration
 {
     /**
      * You can specify a autoId property in the Migration class and set it to false,
@@ -63,11 +63,11 @@ class InitialBechlemIdentifiers extends AbstractMigration
         $table = $this->table($tableName, ['id' => false, 'primary_key' => ['id']]);
         $table
             ->addColumn('id', 'integer', ['signed' => false, 'identity' => true])
-            ->addColumn('uuid_id', 'uuid', ['null' => true])
             ->addColumn('id_item', 'string', ['limit' => 255, 'null' => true])
             ->addColumn('id_position', 'string', ['limit' => 255, 'null' => true])
             ->addColumn('id_type', 'string', ['limit' => 255, 'null' => true])
             ->addColumn('id_identifier', 'string', ['limit' => 255, 'null' => true])
+            ->addColumn('uuid_id', 'uuid', ['null' => true])
             ->addColumn('sync_id', 'string', ['limit' => 255, 'null' => true])
             ->addColumn('created', 'datetime', ['null' => true])
             ->addColumn('created_by', 'integer', ['default' => null, 'limit' => 11, 'null' => true])

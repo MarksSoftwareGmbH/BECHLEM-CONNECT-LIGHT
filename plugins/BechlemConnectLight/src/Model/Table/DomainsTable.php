@@ -82,8 +82,10 @@ class DomainsTable extends Table
         ]);
 
         // Setup search filter using search manager
-        $this->searchManager()
+        $this->getBehavior('Search')->searchManager()
             ->add('search', 'Search.Like', [
+                'multiValue' => true,
+                'multiValueSeparator' => ' ',
                 'before' => true,
                 'after' => true,
                 'fieldMode' => 'OR',
@@ -192,7 +194,7 @@ class DomainsTable extends Table
      *
      * @return string
      */
-    public function getNameById(int $id = null)
+    public function getNameById(?int $id = null)
     {
         $name = '';
 

@@ -105,7 +105,7 @@ class ProductsController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -177,7 +177,7 @@ class ProductsController extends AppController
      * @param int|null $id Product id.
      * @return \Cake\Http\Response|void
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $product = $this->Products->get($id, contain: [
             'ProductBrands',
@@ -214,7 +214,7 @@ class ProductsController extends AppController
      *
      * @return \Cake\Http\Response|void|null
      */
-    public function add(string $productTypeAlias = null)
+    public function add(?string $productTypeAlias = null)
     {
         // Get ProductType
         $productType = $this->Products->ProductTypes
@@ -372,7 +372,7 @@ class ProductsController extends AppController
      *
      * @return \Cake\Http\Response|void|null
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $product = $this->Products->get($id, contain: [
             'ProductBrands',
@@ -515,7 +515,7 @@ class ProductsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function copy(int $id = null)
+    public function copy(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post']);
 
@@ -595,7 +595,7 @@ class ProductsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $product = $this->Products->get($id);

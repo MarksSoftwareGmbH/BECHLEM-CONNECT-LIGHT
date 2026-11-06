@@ -31,7 +31,9 @@ use BechlemConnectLight\Utility\BechlemConnectLight;
 use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
 use Cake\I18n\DateTime;
+use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
+use Cake\Utility\Text;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -77,7 +79,7 @@ class DomainsController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -107,7 +109,7 @@ class DomainsController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $domain = $this->Domains->get($id, contain: [
             'Locales' => function ($q) {
@@ -115,9 +117,17 @@ class DomainsController extends AppController
             }
         ]);
 
-        BechlemConnectLight::dispatchEvent('Controller.Admin.Domains.beforeViewRender', $this, ['Domain' => $domain]);
+        $Users = TableRegistry::getTableLocator()->get('BechlemConnectLight.Users');
+        $users = $Users
+            ->find('list', order: ['Users.name' => 'ASC'], keyField: 'id', valueField: 'name_username_email')
+            ->toArray();
 
-        $this->set('domain', $domain);
+        BechlemConnectLight::dispatchEvent('Controller.Admin.Domains.beforeViewRender', $this, [
+            'Domain'    => $domain,
+            'Users'     => $users,
+        ]);
+
+        $this->set(compact('domain', 'users'));
     }
 
     /**
@@ -170,7 +180,7 @@ class DomainsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $domain = $this->Domains->get($id, contain: [
             'Locales' => function ($q) {
@@ -217,7 +227,7 @@ class DomainsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $domain = $this->Domains->get($id);
@@ -247,6 +257,8 @@ class DomainsController extends AppController
      */
     public function import()
     {
+        $session = $this->getRequest()->getSession();
+
         if ($this->getRequest()->is('post') || !empty($this->getRequest()->getData())) {
 
             $postData = $this->getRequest()->getData();
@@ -317,8 +329,11 @@ class DomainsController extends AppController
                             Hash::merge(
                                 $domain,
                                 [
-                                    'created' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
-                                    'modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'uuid_id'       => Text::uuid(),
+                                    'created'       => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'created_by'    => $session->read('Auth.User.id'),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );
@@ -331,7 +346,10 @@ class DomainsController extends AppController
                             $existent,
                             Hash::merge(
                                 $domain,
-                                ['modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss')]
+                                [
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
+                                ]
                             )
                         );
                         if ($this->Domains->save($domain)) {

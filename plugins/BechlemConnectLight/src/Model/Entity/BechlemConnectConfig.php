@@ -33,14 +33,15 @@ use Cake\Utility\Text;
  * BechlemConnectConfig Entity
  *
  * @property int $id
- * @property string $title
- * @property string $alias
- * @property string $description
- * @property string $host
- * @property string $port
- * @property string $scheme
- * @property string $username
- * @property string $password
+ * @property string|null $uuid_id
+ * @property string|null $title
+ * @property string|null $alias
+ * @property string|null $description
+ * @property string|null $host
+ * @property string|null $port
+ * @property string|null $scheme
+ * @property string|null $username
+ * @property string|null $password
  * @property bool $status
  * @property \Cake\I18n\Time $created
  * @property int $created_by
@@ -77,7 +78,7 @@ class BechlemConnectConfig extends Entity
      * @return string
      * @link http://book.cakephp.org/3.0/en/core-libraries/inflector.html#creating-url-safe-strings
      */
-    protected function _setTitle($title)
+    protected function _setTitle(string $title)
     {
         $this->set('alias', Text::slug(strtolower($title)));
         return $title;

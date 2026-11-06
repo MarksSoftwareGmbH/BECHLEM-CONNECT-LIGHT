@@ -82,7 +82,7 @@ class ProductManufacturersController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -113,7 +113,7 @@ class ProductManufacturersController extends AppController
      * @param int|null $id
      * @return void
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $productManufacturer = $this->ProductManufacturers->get($id);
 
@@ -172,7 +172,7 @@ class ProductManufacturersController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function edit($id = null)
+    public function edit(?int $id = null)
     {
         $productManufacturer = $this->ProductManufacturers->get($id);
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
@@ -218,7 +218,7 @@ class ProductManufacturersController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete($id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $productManufacturer = $this->ProductManufacturers->get($id);
@@ -253,6 +253,8 @@ class ProductManufacturersController extends AppController
      */
     public function import()
     {
+        $session = $this->getRequest()->getSession();
+
         if ($this->getRequest()->is('post') || !empty($this->getRequest()->getData())) {
 
             $postData = $this->getRequest()->getData();
@@ -322,9 +324,12 @@ class ProductManufacturersController extends AppController
                             Hash::merge(
                                 $productManufacturer,
                                 [
-                                    'slug'      => Text::slug(strtolower($productManufacturer['slug'])),
-                                    'created'   => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
-                                    'modified'  => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'uuid_id'       => Text::uuid(),
+                                    'slug'          => Text::slug(strtolower($productManufacturer['slug'])),
+                                    'created'       => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'created_by'    => $session->read('Auth.User.id'),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );
@@ -338,8 +343,9 @@ class ProductManufacturersController extends AppController
                             Hash::merge(
                                 $productManufacturer,
                                 [
-                                    'slug'      => Text::slug(strtolower($productManufacturer['slug'])),
-                                    'modified'  => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'slug'          => Text::slug(strtolower($productManufacturer['slug'])),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );

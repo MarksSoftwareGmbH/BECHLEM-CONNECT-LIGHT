@@ -83,7 +83,7 @@ class BechlemIdentifiersController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $bechlemIdentifier = $this->BechlemIdentifiers->get($id);
 

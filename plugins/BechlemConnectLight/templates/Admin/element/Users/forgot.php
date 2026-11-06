@@ -53,7 +53,7 @@ $this->assign('title', $this->BechlemConnectLight->readCamel($this->getRequest()
                         '/',
                         ['escapeTitle' => false]); ?>
                 </div>
-                <p class="login-box-msg text-sm">
+                <p class="login-box-msg">
                     <?= __d('bechlem_connect_light', 'Create a new password'); ?>
                 </p>
                 <?php $this->Form->setTemplates([
@@ -74,6 +74,7 @@ $this->assign('title', $this->BechlemConnectLight->readCamel($this->getRequest()
                     'label'         => false,
                     'required'      => true,
                     'placeholder'   => __d('bechlem_connect_light', 'Username'),
+                    'class'         => 'shadow rounded',
                 ]); ?>
                 <?= $this->Form->control('email', [
                     'append'        => $this->Html->icon('envelope'),
@@ -81,6 +82,7 @@ $this->assign('title', $this->BechlemConnectLight->readCamel($this->getRequest()
                     'label'         => false,
                     'required'      => true,
                     'placeholder'   => __d('bechlem_connect_light', 'Email'),
+                    'class'         => 'shadow rounded',
                 ]); ?>
                 <?= $this->Form->control('verify_email', [
                     'append'        => $this->Html->icon('envelope'),
@@ -88,6 +90,7 @@ $this->assign('title', $this->BechlemConnectLight->readCamel($this->getRequest()
                     'label'         => false,
                     'required'      => true,
                     'placeholder'   => __d('bechlem_connect_light', 'Verify email'),
+                    'class'         => 'shadow rounded',
                 ]); ?>
                 <?= $this->Form->control('captcha_result', [
                     'append'        => $this->Html->icon('plus-square'),
@@ -101,6 +104,7 @@ $this->assign('title', $this->BechlemConnectLight->readCamel($this->getRequest()
                         . ' ' . '('
                         . __d('bechlem_connect_light', 'Please calculate this addition')
                         . ')',
+                    'class'         => 'shadow rounded',
                 ]); ?>
                 <div class="row">
                     <div class="col-12">
@@ -108,13 +112,13 @@ $this->assign('title', $this->BechlemConnectLight->readCamel($this->getRequest()
                             __d('bechlem_connect_light', 'Home'),
                             '/',
                             [
-                                'class'         => 'btn btn-' . h($backendButtonColor),
+                                'class'         => 'shadow rounded btn btn-' . h($backendButtonColor),
                                 'escapeTitle'   => false,
                             ]); ?>
                         <?= $this->Form->button(
-                            __d('bechlem_connect_light', 'Create a new password'),
+                            __d('bechlem_connect_light', 'Forgot'),
                             [
-                                'class'         => 'btn btn-' . h($backendButtonColor) . ' float-right',
+                                'class'         => 'float-right shadow rounded btn btn-outline-success',
                                 'escapeTitle'   => false,
                             ]); ?>
                     </div>
@@ -123,53 +127,64 @@ $this->assign('title', $this->BechlemConnectLight->readCamel($this->getRequest()
             </div>
         </div>
     </div>
-
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery' . DS . 'jquery.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-ui' . DS . 'jquery-ui.min', ['block' => 'scripts']); ?>
-
+    <?= $this->Html->script([
+        'BechlemConnectLight./adminlte/plugins/jquery/jquery.min',
+        'BechlemConnectLight./adminlte/plugins/jquery-ui/jquery-ui.min'
+    ], ['block' => 'scripts']); ?>
     <?= $this->Html->scriptBlock("$.widget.bridge('uibutton', $.ui.button)", ['block' => 'scripts']); ?>
-
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'bootstrap' . DS . 'js' . DS . 'bootstrap.bundle.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-validation' . DS . 'jquery.validate.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-validation' . DS . 'additional-methods.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jqvmap' . DS . 'jquery.vmap.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jqvmap' . DS . 'maps' . DS . 'jquery.vmap.world', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-knob' . DS . 'jquery.knob.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'moment' . DS . 'moment.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'daterangepicker' . DS . 'daterangepicker', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'tempusdominus-bootstrap-4' . DS . 'js' . DS . 'tempusdominus-bootstrap-4.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'summernote' . DS . 'summernote-bs4.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'overlayScrollbars' . DS . 'js' . DS . 'jquery.overlayScrollbars.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'adminlte.min', ['block' => 'scripts']); ?>
-
+    <?= $this->Html->script([
+        'BechlemConnectLight./adminlte/plugins/bootstrap/js/bootstrap.bundle.min',
+        'BechlemConnectLight./adminlte/plugins/jquery-validation/jquery.validate.min',
+        'BechlemConnectLight./adminlte/plugins/jquery-validation/additional-methods.min',
+        'BechlemConnectLight./adminlte/plugins/jqvmap/jquery.vmap.min',
+        'BechlemConnectLight./adminlte/plugins/jqvmap/maps/jquery.vmap.world',
+        'BechlemConnectLight./adminlte/plugins/jquery-knob/jquery.knob.min',
+        'BechlemConnectLight./adminlte/plugins/moment/moment.min',
+        'BechlemConnectLight./adminlte/plugins/daterangepicker/daterangepicker',
+        'BechlemConnectLight./adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min',
+        'BechlemConnectLight./adminlte/plugins/summernote/summernote-bs4.min',
+        'BechlemConnectLight./adminlte/plugins/select2/js/select2.full.min',
+        'BechlemConnectLight./adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min',
+        'BechlemConnectLight./adminlte/dist/js/adminlte.min',
+    ], ['block' => 'scripts']); ?>
     <?= $this->Html->scriptBlock(
         '$(function() {
-            $(".form-login").validate({
+            $(\'.form-login\').validate({
                 rules: {
-                    username: { required: true },
-                    email: { required: true },
-                    verify_email: { required: true }
+                    username: {
+                        required: true
+                    },
+                    email: {
+                        required: true
+                    },
+                    verify_email: {
+                        required: true
+                    }
                 },
                 messages: {
-                    username: { required: "Please enter a username" },
-                    email: { required: "Please enter a email" },
-                    verify_email: { required: "Please verify the email" }
+                    username: {
+                        required: \'' . __d('bechlem_connect_light', 'Please enter a valid username') . '\'
+                    },
+                    email: {
+                        required: \'' . __d('bechlem_connect_light', 'Please enter a valid email address') . '\'
+                    },
+                    verify_email: {
+                        required: \'' . __d('bechlem_connect_light', 'Please verify the email') . '\'
+                    }
                 },
-                errorElement: "span",
+                errorElement: \'span\',
                 errorPlacement: function (error, element) {
-                    error.addClass("invalid-feedback");
-                    element.closest(".form-group").append(error);
+                    error.addClass(\'invalid-feedback\');
+                    element.closest(\'.form-group\').append(error);
                 },
                 highlight: function (element, errorClass, validClass) {
-                    $(element).addClass("is-invalid");
+                    $(element).addClass(\'is-invalid\');
                 },
                 unhighlight: function (element, errorClass, validClass) {
-                    $(element).removeClass("is-invalid");
+                    $(element).removeClass(\'is-invalid\');
                 }
             });
-        });',
-        ['block' => 'scriptBottom']); ?>
-
+        });', ['block' => 'scriptBottom']); ?>
     <?= $this->fetch('scripts'); ?>
     <?= $this->fetch('scriptBottom'); ?>
 </body>

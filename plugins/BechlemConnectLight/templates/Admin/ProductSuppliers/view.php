@@ -204,7 +204,5 @@ $this->Breadcrumbs->add([
     </div>
 </div>
 
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/prism/prism.min'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/prism/prism.min', ['block' => 'scriptBottom']); ?>

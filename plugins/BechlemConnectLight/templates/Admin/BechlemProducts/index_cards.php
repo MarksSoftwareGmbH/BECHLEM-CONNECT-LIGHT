@@ -224,19 +224,11 @@ $this->Breadcrumbs->add([
         </div>
     </div>
 </div>
-
 <?= $this->element('please_wait'); ?>
-
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();
-    });',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->scriptBlock(
-    '$(function() {
         $(\'.run\').on(\'click\', function () {
             $(\'#pleaseWait\').modal(\'show\');
         });

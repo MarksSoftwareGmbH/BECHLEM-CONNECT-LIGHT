@@ -92,7 +92,7 @@ class ManagersTable extends Table
         ]);
 
         // Setup search filter using search manager
-        $this->searchManager()
+        $this->getBehavior('Search')->searchManager()
             ->value('role_id', [
                 'fields' => ['role_id']
             ])
@@ -100,6 +100,8 @@ class ManagersTable extends Table
                 'fields' => ['locale_id'],
             ])
             ->add('search', 'Search.Like', [
+                'multiValue' => true,
+                'multiValueSeparator' => ' ',
                 'before' => true,
                 'after' => true,
                 'fieldMode' => 'OR',

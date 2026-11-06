@@ -173,16 +173,15 @@ $this->Breadcrumbs->add([
                 <?= $this->Form->end(); ?>
                 <?= $this->fetch('postLink'); ?>
             </div>
-
             <div class="card-body table-responsive">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('RegistrationType.title', __d('bechlem_connect_light', 'Type')); ?></th>
-                        <th><?= $this->Paginator->sort('billing_name', __d('bechlem_connect_light', 'Name')); ?></th>
-                        <th><?= $this->Paginator->sort('billing_email', __d('bechlem_connect_light', 'Email')); ?></th>
-                        <th><?= $this->Paginator->sort('billing_telephone', __d('bechlem_connect_light', 'Telephone')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('RegistrationType.title', __d('bechlem_connect_light', 'Type')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('billing_name', __d('bechlem_connect_light', 'Name')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('billing_email', __d('bechlem_connect_light', 'Email')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('billing_telephone', __d('bechlem_connect_light', 'Telephone')); ?></strong></small></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -207,6 +206,7 @@ $this->Breadcrumbs->add([
                             <td><?= h($registration->billing_email); ?></td>
                             <td><?= h($registration->billing_telephone); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?= $this->Html->link(
                                     $this->Html->icon('eye'),
                                     [
@@ -251,6 +251,7 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escapeTitle'   => false,
                                     ]); ?>
+                            </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -261,10 +262,7 @@ $this->Breadcrumbs->add([
         </div>
     </div>
 </div>
-
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();

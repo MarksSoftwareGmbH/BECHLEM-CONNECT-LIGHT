@@ -103,8 +103,12 @@ $this->Breadcrumbs->add([
                     <dd class="col-sm-9"><?= empty($user->last_login)? '-': h($user->last_login->format('d.m.Y H:i:s')); ?></dd>
                     <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Created'); ?></dt>
                     <dd class="col-sm-9"><?= empty($user->created)? '-': h($user->created->format('d.m.Y H:i:s')); ?></dd>
+                    <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Created by'); ?></dt>
+                    <dd class="col-sm-9"><?= !empty($users)? $users[h($user->created_by)]: h($user->created_by); ?></dd>
                     <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Modified'); ?></dt>
                     <dd class="col-sm-9"><?= empty($user->modified)? '-': h($user->modified->format('d.m.Y H:i:s')); ?></dd>
+                    <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Modified by'); ?></dt>
+                    <dd class="col-sm-9"><?= !empty($users)? $users[h($user->modified_by)]: h($user->modified_by); ?></dd>
                 </dl>
             </div>
         </div>

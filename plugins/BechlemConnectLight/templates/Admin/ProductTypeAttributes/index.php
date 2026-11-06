@@ -182,18 +182,17 @@ $this->Breadcrumbs->add([
                 ]); ?>
                 <?= $this->Form->end(); ?>
             </div>
-
             <div class="card-body table-responsive">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('foreign_key', __d('bechlem_connect_light', 'Foreign key')); ?></th>
-                        <th><?= $this->Paginator->sort('title', __d('bechlem_connect_light', 'Title')); ?></th>
-                        <th><?= $this->Paginator->sort('alias', __d('bechlem_connect_light', 'Alias')); ?></th>
-                        <th><?= $this->Paginator->sort('type', __d('bechlem_connect_light', 'Type')); ?></th>
-                        <th><?= $this->Paginator->sort('empty_value', __d('bechlem_connect_light', 'Empty value')); ?></th>
-                        <th><?= $this->Paginator->sort('wysiwyg', __d('bechlem_connect_light', 'WYSIWYG')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('foreign_key', __d('bechlem_connect_light', 'Foreign key')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('title', __d('bechlem_connect_light', 'Title')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('alias', __d('bechlem_connect_light', 'Alias')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('type', __d('bechlem_connect_light', 'Type')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('empty_value', __d('bechlem_connect_light', 'Empty value')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('wysiwyg', __d('bechlem_connect_light', 'WYSIWYG')); ?></strong></small></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -206,6 +205,7 @@ $this->Breadcrumbs->add([
                             <td><?= $this->BechlemConnectLight->status(h($productTypeAttribute->empty_value)); ?></td>
                             <td><?= $this->BechlemConnectLight->status(h($productTypeAttribute->wysiwyg)); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?php if (!empty($productTypeAttribute->product_type_attribute_choices)): ?>
                                     <?= $this->Html->link($this->Html->icon('list'), '#', [
                                         'title'         => __d('bechlem_connect_light', 'Type attribute choices'),
@@ -294,22 +294,18 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escape'        => false,
                                     ]); ?>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
-
             <?= $this->element('paginator'); ?>
-
         </div>
     </div>
 </div>
-
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();

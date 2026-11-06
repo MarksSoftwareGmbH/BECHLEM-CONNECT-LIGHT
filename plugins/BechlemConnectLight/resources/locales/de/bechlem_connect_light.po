@@ -4007,156 +4007,124 @@ msgstr "Ich habe bereits die Bechlem GmbH API Schnittstellenlizenz!"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:56
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:84
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:29
 msgid "MIT license documentation"
 msgstr "MIT Lizenz Dokumentation"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:103
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:30
 msgid "BECHLEM CONNECT \"LIGHT\" is an open source project that is licensed under the {mitLicense}. This allows you to do pretty much anything you want as long as you include the copyright in “all copies or substantial portions of the Software”."
 msgstr "BECHLEM CONNECT \"LIGHT\" ist ein Open-Source Projekt, das unter der {mitLicense} lizenziert ist. Dies erlaubt Ihnen, so ziemlich alles zu tun, was Sie wollen, solange Sie das Copyright in "alle Kopien oder wesentlichen Teile der Software" aufnehmen."
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:107
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:111
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:34
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:39
 msgid "MIT license"
 msgstr "MIT Lizenz"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:115
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:43
 msgid "What you are {allowed} to do with BECHLEM CONNECT \"LIGHT\""
 msgstr "Was Sie mit BECHLEM CONNECT \"LIGHT\" {allowed}"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:115
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:43
 msgid "ALLOWED"
 msgstr "machen dürfen"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:118
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:46
 msgid "Use in commercial projects."
 msgstr "Verwendung in kommerziellen Projekten."
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:119
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:47
 msgid "Use in personal / private projects."
 msgstr "Verwendung in persönlichen / privaten Projekten."
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:120
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:48
 msgid "Modify and change the work."
 msgstr "Ändern und verändern Sie das Werkstück."
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:121
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:49
 msgid "Distribute the code."
 msgstr "Verbreiten Sie den Code."
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:122
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:50
 msgid "Sublicense: incorporate the work into something that has a more restrictive license."
 msgstr "Unterlizenz: das Werk in etwas einbauen, das eine restriktivere Lizenz hat."
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:125
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:53
 msgid "What you {must} to do with BECHLEM CONNECT \"LIGHT\""
 msgstr "Was Sie mit BECHLEM CONNECT \"LIGHT\" {must}"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:125
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:53
 msgid "MUST"
 msgstr "machen müssen"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:128
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:56
 msgid "Include the license notice in all copies of the work."
 msgstr "Fügen Sie den Lizenzhinweis in alle Kopien des Werks ein."
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:129
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:57
 msgid "Include the copyright notice in all copies of the work. This applies to everything inclusive the copyright notice in the application footer."
 msgstr "Fügen Sie den Urheberrechtsvermerk in alle Kopien des Werks ein. Dies gilt für alles einschließlich des Urheberrechtsvermerks in der Fußzeile der Anwendung."
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:132
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:60
 msgid "What you are {notAllowed} to do with BECHLEM CONNECT \"LIGHT\""
 msgstr "Was Sie mit BECHLEM CONNECT \"LIGHT\" {notAllowed}"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:132
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:60
 msgid "NOT ALLOWED"
 msgstr "nicht machen dürfen"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/mit_license_documentation.php:135
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/mit_license_documentation_pdf.php:63
 msgid "The work is provided “as is”. You may not hold the author liable."
 msgstr "Das Werk wird "wie gesehen" zur Verfügung gestellt. Sie können den Autor nicht haftbar machen."
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:56
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:77
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:105
 msgid "REST API documentation"
 msgstr "REST API Dokumentation"
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:57
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:124
 msgid "The REST API lets you build apps and integrations that extend and enhance the BECHLEM CONNECT \"LIGHT\" application and middleware."
 msgstr "Mit der REST API können Sie Anwendungen und Integrationen erstellen, die die BECHLEM CONNECT \"LIGHT\" Anwendung und Middleware erweitern und verbessern."
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:62
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:129
 msgid "REST API user"
 msgstr "REST API Benutzer"
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:65
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:132
 msgid "First you need to create a {user} with the {role} \"{rest}\" for the authentication request."
 msgstr "Zuerst müssen Sie einen {user} mit der {role} \"{rest}\" für die Authentifizierungsanfrage erstellen."
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:94
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:103
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:161
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:170
 msgid "Rest"
 msgstr "Rest"
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:111
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:178
 msgid "Authentication"
 msgstr "Authentifizierung"
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:114
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:181
 msgid "All REST API queries require a valid {jwt}."
 msgstr "Alle REST API Abfragen erfordern einen gültigen {jwt}."
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:127
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:194
 msgid "This is an open standard ({rfc7519}) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object."
 msgstr "Dies ist ein offener Standard ({rfc7519}), der eine kompakte und in sich geschlossene Methode zur sicheren Übertragung von Informationen zwischen Parteien als JSON-Objekt definiert."
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:141
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:208
 msgid "Second you need to request a Bearer token with the created Rest user via username:password through a POST method."
 msgstr "Zweitens müssen Sie ein Bearer-Token mit dem erstellten Rest Benutzer über Benutzername:Passwort über eine POST Methode anfordern."
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:142
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:209
 msgid "Whenever the user wants to access a protected route or resource, the user agent should send the JWT, typically in the Authorization header using the Bearer schema. The content of the header should look like the following:"
 msgstr "Wann immer der Benutzer auf eine geschützte Route oder Ressource zugreifen möchte, sollte der Benutzeragent den JWT senden, normalerweise im Authorization-Header unter Verwendung des Bearer Schemas. Der Inhalt des Headers sollte wie folgt aussehen:"
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:144
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:211
 msgid "Include your token as a Bearer-Token header on all API queries."
 msgstr "Fügen Sie Ihr Token als Bearer-Token Header in alle API Abfragen ein."
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:145
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:212
 msgid "To keep the platform secure, apps need to request specific access scopes during the process."
 msgstr "Um die Sicherheit der Plattform zu gewährleisten, müssen die Anwendungen während des Prozesses bestimmte Zugriffsbereiche anfordern."
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:146
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:213
 msgid "Only request as much data access as your app needs to work."
 msgstr "Fordern Sie nur so viel Datenzugriff an, wie Ihre Anwendung zum Funktionieren benötigt."
@@ -4229,7 +4197,6 @@ msgstr "Protokoll hinzufügen"
 msgid "Edit log"
 msgstr "Protokoll bearbeiten"
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:147
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:214
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:366
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:416
@@ -4241,7 +4208,6 @@ msgstr "Protokoll bearbeiten"
 msgid "Request"
 msgstr "Anfrage"
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:150
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:222
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:377
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:427
@@ -4251,7 +4217,6 @@ msgstr "Anfrage"
 msgid "Response"
 msgstr "Antwort"
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:167
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:239
 msgid "Code snippet"
 msgstr "Codeschnipsel"
@@ -5208,8 +5173,6 @@ msgstr "Männlich"
 msgid "Female"
 msgstr "Weiblich"
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:70
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:78
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:137
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:145
 #: ./plugins/BechlemConnectLight/templates/Admin/UserProfiles/add.php:203
@@ -5352,8 +5315,6 @@ msgstr "Passwort Vorschlag"
 msgid "use"
 msgstr "verwenden"
 
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:82
-#: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/pdf/rest_api_documentation_pdf.php:90
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:149
 #: ./plugins/BechlemConnectLight/templates/Admin/Dashboards/rest_api_documentation.php:157
 #: ./plugins/BechlemConnectLight/templates/Admin/Users/add.php:112
@@ -5728,17 +5689,14 @@ msgid "Box color"
 msgstr "Box Farbe"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/element/footer.php:37
-#: ./plugins/BechlemConnectLight/templates/Admin/layout/pdf/default.php:127
 msgid "&copy; Copyright {date} {link}"
 msgstr "&copy; Copyright {date} {link}"
 
 #: ./plugins/BechlemConnectLight/templates/Admin/element/footer.php:48
-#: ./plugins/BechlemConnectLight/templates/Admin/layout/pdf/default.php:141
 msgid "All rights reserved."
 msgstr "Alle Rechte vorbehalten."
 
 #: ./plugins/BechlemConnectLight/templates/Admin/element/footer.php:50
-#: ./plugins/BechlemConnectLight/templates/Admin/layout/pdf/default.php:142
 msgid "Powered by {bechlemConnectLight}"
 msgstr "Powered by {bechlemConnectLight}"
 

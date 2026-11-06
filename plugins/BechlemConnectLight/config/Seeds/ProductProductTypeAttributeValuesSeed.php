@@ -25,12 +25,12 @@ declare(strict_types=1);
  * SOFTWARE.
  */
 use Cake\I18n\DateTime;
-use Migrations\AbstractSeed;
+use Migrations\BaseSeed;
 
 /**
  * ProductProductTypeAttributeValues seed.
  */
-class ProductProductTypeAttributeValuesSeed extends AbstractSeed
+class ProductProductTypeAttributeValuesSeed extends BaseSeed
 {
     /**
      * Run Method.

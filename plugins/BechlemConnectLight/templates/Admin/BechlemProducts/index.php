@@ -173,16 +173,16 @@ $this->Breadcrumbs->add([
                 <?= $this->fetch('postLink'); ?>
             </div>
             <div class="card-body table-responsive">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= __d('bechlem_connect_light', 'Image'); ?></th>
-                        <th><?= $this->Paginator->sort('bechlem_id', __d('bechlem_connect_light', 'Bechlem id')); ?></th>
-                        <th><?= $this->Paginator->sort('your_sku', __d('bechlem_connect_light', 'Your sku')); ?></th>
-                        <th><?= $this->Paginator->sort('manufacturer_sku', __d('bechlem_connect_light', 'Manufacturer sku')); ?></th>
-                        <th><?= $this->Paginator->sort('ean', __d('bechlem_connect_light', 'EAN')); ?></th>
-                        <th><?= $this->Paginator->sort('modified', __d('bechlem_connect_light', 'Modified')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= __d('bechlem_connect_light', 'Image'); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('bechlem_id', __d('bechlem_connect_light', 'Bechlem id')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('your_sku', __d('bechlem_connect_light', 'Your sku')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('manufacturer_sku', __d('bechlem_connect_light', 'Manufacturer sku')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('ean', __d('bechlem_connect_light', 'EAN')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('modified', __d('bechlem_connect_light', 'Modified')); ?></strong></small></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -243,6 +243,7 @@ $this->Breadcrumbs->add([
                                     ]); ?></td>
                             <td><?= h($bechlemProduct->modified->format('d.m.Y H:i:s')); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?= $this->Html->link(
                                     $this->Html->icon('eye'),
                                     [
@@ -256,6 +257,7 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escape'        => false,
                                     ]); ?>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -266,19 +268,11 @@ $this->Breadcrumbs->add([
         </div>
     </div>
 </div>
-
 <?= $this->element('please_wait'); ?>
-
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();
-    });',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->scriptBlock(
-    '$(function() {
         $(\'.run\').on(\'click\', function () {
             $(\'#pleaseWait\').modal(\'show\');
         });

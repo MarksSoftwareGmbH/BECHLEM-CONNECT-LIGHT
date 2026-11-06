@@ -124,7 +124,8 @@ $this->Html->meta([
                         'url' => [
                             'plugin'        => 'BechlemConnectLight',
                             'controller'    => 'Users',
-                            'action'        => 'login'
+                            'action'        => 'login',
+                            'prefix'        => 'Admin',
                         ],
                         'class' => 'form-login',
                     ]); ?>
@@ -134,6 +135,7 @@ $this->Html->meta([
                         'label'         => false,
                         'required'      => true,
                         'placeholder'   => __d('bechlem_connect_light', 'Username'),
+                        'class'         => 'shadow rounded',
                     ]); ?>
                     <?= $this->Form->control('password', [
                         'append'        => $this->Html->icon('lock'),
@@ -141,6 +143,7 @@ $this->Html->meta([
                         'label'         => false,
                         'required'      => true,
                         'placeholder'   => __d('bechlem_connect_light', 'Password'),
+                        'class'         => 'shadow rounded',
                     ]); ?>
                     <div class="row">
                         <div class="col-12">
@@ -152,13 +155,13 @@ $this->Html->meta([
                                     'action'        => 'forgot',
                                 ],
                                 [
-                                    'class'         => 'btn btn-' . h($frontendButtonColor),
+                                    'class'         => 'shadow rounded btn btn-' . h($frontendButtonColor),
                                     'escapeTitle'   => false,
                                 ]); ?>
                             <?= $this->Form->button(
                                 __d('bechlem_connect_light', 'Login'),
                                 [
-                                    'class'         => 'float-right btn btn-' . h($frontendButtonColor),
+                                    'class'         => 'float-right shadow rounded btn btn-outline-success',
                                     'escapeTitle'   => false,
                                 ]); ?>
                         </div>
@@ -168,23 +171,26 @@ $this->Html->meta([
             </div>
         </div>
     </div>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery' . DS . 'jquery.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-ui' . DS . 'jquery-ui.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'bootstrap' . DS . 'js' . DS . 'bootstrap.bundle.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-validation' . DS . 'jquery.validate.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-validation' . DS . 'additional-methods.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jqvmap' . DS . 'jquery.vmap.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jqvmap' . DS . 'maps' . DS . 'jquery.vmap.world', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jquery-knob' . DS . 'jquery.knob.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'moment' . DS . 'moment.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'daterangepicker' . DS . 'daterangepicker', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'tempusdominus-bootstrap-4' . DS . 'js' . DS . 'tempusdominus-bootstrap-4.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'summernote' . DS . 'summernote-bs4.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'overlayScrollbars' . DS . 'js' . DS . 'jquery.overlayScrollbars.min', ['block' => 'scripts']); ?>
-    <?= $this->Html->script('BechlemConnectLight' . '.' . 'admin' . DS . 'adminlte.min', ['block' => 'scripts']); ?>
-    <?= $this->fetch('scripts'); ?>
-    <?= $this->fetch('scriptBottom'); ?>
-    <?= $this->Html->scriptBlock('$.widget.bridge(\'uibutton\', $.ui.button);'); ?>
+    <?= $this->Html->script([
+        'BechlemConnectLight./adminlte/plugins/jquery/jquery.min',
+        'BechlemConnectLight./adminlte/plugins/jquery-ui/jquery-ui.min'
+    ], ['block' => 'scripts']); ?>
+    <?= $this->Html->scriptBlock("$.widget.bridge('uibutton', $.ui.button)", ['block' => 'scripts']); ?>
+    <?= $this->Html->script([
+        'BechlemConnectLight./adminlte/plugins/bootstrap/js/bootstrap.bundle.min',
+        'BechlemConnectLight./adminlte/plugins/jquery-validation/jquery.validate.min',
+        'BechlemConnectLight./adminlte/plugins/jquery-validation/additional-methods.min',
+        'BechlemConnectLight./adminlte/plugins/jqvmap/jquery.vmap.min',
+        'BechlemConnectLight./adminlte/plugins/jqvmap/maps/jquery.vmap.world',
+        'BechlemConnectLight./adminlte/plugins/jquery-knob/jquery.knob.min',
+        'BechlemConnectLight./adminlte/plugins/moment/moment.min',
+        'BechlemConnectLight./adminlte/plugins/daterangepicker/daterangepicker',
+        'BechlemConnectLight./adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min',
+        'BechlemConnectLight./adminlte/plugins/summernote/summernote-bs4.min',
+        'BechlemConnectLight./adminlte/plugins/select2/js/select2.full.min',
+        'BechlemConnectLight./adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min',
+        'BechlemConnectLight./adminlte/dist/js/adminlte.min',
+    ], ['block' => 'scripts']); ?>
     <?= $this->Html->scriptBlock(
         '$(function() {
             $(\'.form-login\').validate({
@@ -216,5 +222,7 @@ $this->Html->meta([
                     $(element).removeClass(\'is-invalid\');
                 }
             });
-        });'); ?>
+        });', ['block' => 'scriptBottom']); ?>
+    <?= $this->fetch('scripts'); ?>
+    <?= $this->fetch('scriptBottom'); ?>
 </body>

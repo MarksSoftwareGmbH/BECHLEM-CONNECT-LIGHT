@@ -7,5 +7,5 @@ You can install this plugin into your CakePHP application using [composer](https
 The recommended way to install composer packages is:
 
 ```
-composer marks-software-gmbh/bechlem-connect-light
+composer require marks-software-gmbh/bechlem-connect-light-plugin
 ```

@@ -168,19 +168,18 @@ $this->Breadcrumbs->add([
                 ]); ?>
                 <?= $this->Form->end(); ?>
             </div>
-
             <div class="card-body table-responsive">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered table-hover text-nowrap" id="slideActionsTable">
                     <thead>
                     <tr>
-                        <th><?= $this->Paginator->sort('request', __d('bechlem_connect_light', 'Request')); ?></th>
-                        <th><?= $this->Paginator->sort('type', __d('bechlem_connect_light', 'Type')); ?></th>
-                        <th><?= $this->Paginator->sort('message', __d('bechlem_connect_light', 'Message')); ?></th>
-                        <th><?= $this->Paginator->sort('ip', __d('bechlem_connect_light', 'IP')); ?></th>
-                        <th><?= $this->Paginator->sort('uri', __d('bechlem_connect_light', 'URI')); ?></th>
-                        <th><?= $this->Paginator->sort('data', __d('bechlem_connect_light', 'Data')); ?></th>
-                        <th><?= $this->Paginator->sort('created', __d('bechlem_connect_light', 'Created')); ?></th>
-                        <th class="actions"><?= __d('bechlem_connect_light', 'Actions'); ?></th>
+                        <th><small><strong><?= $this->Paginator->sort('request', __d('bechlem_connect_light', 'Request')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('type', __d('bechlem_connect_light', 'Type')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('message', __d('bechlem_connect_light', 'Message')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('ip', __d('bechlem_connect_light', 'IP')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('uri', __d('bechlem_connect_light', 'URI')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('data', __d('bechlem_connect_light', 'Data')); ?></strong></small></th>
+                        <th><small><strong><?= $this->Paginator->sort('created', __d('bechlem_connect_light', 'Created')); ?></strong></small></th>
+                        <th class="actions"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -242,6 +241,7 @@ $this->Breadcrumbs->add([
                             </td>
                             <td><?= empty($log->modified)? '-': h($log->modified->format('d.m.Y H:i:s')); ?></td>
                             <td class="actions">
+                                <div class="actions-links" style="display: block;">
                                 <?= $this->Html->link(
                                     $this->Html->icon('eye'),
                                     [
@@ -286,6 +286,7 @@ $this->Breadcrumbs->add([
                                         'data-toggle'   => 'tooltip',
                                         'escapeTitle'   => false,
                                     ]); ?>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -296,14 +297,9 @@ $this->Breadcrumbs->add([
         </div>
     </div>
 </div>
-
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'template' . DS . 'admin' . DS . 'default',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/prism/prism.min'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/prism/prism.min', ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/template/admin/default', ['block' => 'scriptBottom']); ?>
 <?= $this->Html->scriptBlock(
     '$(function() {
         Default.init();

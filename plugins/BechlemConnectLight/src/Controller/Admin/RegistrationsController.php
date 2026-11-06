@@ -32,7 +32,9 @@ use Cake\Datasource\ConnectionManager;
 use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
 use Cake\I18n\DateTime;
+use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
+use Cake\Utility\Text;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -116,7 +118,7 @@ class RegistrationsController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -155,7 +157,7 @@ class RegistrationsController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $registration = $this->Registrations
             ->find()
@@ -163,11 +165,17 @@ class RegistrationsController extends AppController
             ->contain(['RegistrationTypes'])
             ->first();
 
+        $Users = TableRegistry::getTableLocator()->get('BechlemConnectLight.Users');
+        $users = $Users
+            ->find('list', order: ['Users.name' => 'ASC'], keyField: 'id', valueField: 'name_username_email')
+            ->toArray();
+
         BechlemConnectLight::dispatchEvent('Controller.Admin.Registrations.beforeViewRender', $this, [
-            'Registration' => $registration,
+            'Registration'  => $registration,
+            'Users'         => $users,
         ]);
 
-        $this->set('registration', $registration);
+        $this->set(compact('registration', 'users'));
     }
 
     /**
@@ -220,7 +228,7 @@ class RegistrationsController extends AppController
      * @return \Cake\Http\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $registration = $this->Registrations->get($id, contain: ['RegistrationTypes']);
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
@@ -265,7 +273,7 @@ class RegistrationsController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $registration = $this->Registrations->get($id);
@@ -305,6 +313,8 @@ class RegistrationsController extends AppController
      */
     public function import()
     {
+        $session = $this->getRequest()->getSession();
+
         if ($this->getRequest()->is('post') || !empty($this->getRequest()->getData())) {
 
             $postData = $this->getRequest()->getData();
@@ -374,8 +384,11 @@ class RegistrationsController extends AppController
                             Hash::merge(
                                 $registration,
                                 [
-                                    'created' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
-                                    'modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'uuid_id'       => Text::uuid(),
+                                    'created'       => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'created_by'    => $session->read('Auth.User.id'),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );
@@ -388,7 +401,10 @@ class RegistrationsController extends AppController
                             $existent,
                             Hash::merge(
                                 $registration,
-                                ['modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss')]
+                                [
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
+                                ]
                             )
                         );
                         if ($this->Registrations->save($registration)) {

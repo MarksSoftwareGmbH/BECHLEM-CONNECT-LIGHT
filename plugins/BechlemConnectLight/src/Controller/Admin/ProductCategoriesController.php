@@ -85,7 +85,7 @@ class ProductCategoriesController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -180,7 +180,7 @@ class ProductCategoriesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function moveUp(int $id = null)
+    public function moveUp(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'put']);
         $productCategory = $this->ProductCategories->get($id);
@@ -206,7 +206,7 @@ class ProductCategoriesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function moveDown(int $id = null)
+    public function moveDown(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'put']);
         $productCategory = $this->ProductCategories->get($id);
@@ -231,7 +231,7 @@ class ProductCategoriesController extends AppController
      * @param int|null $id
      * @return void
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $productCategory = $this->ProductCategories->get($id, contain: [
             'ParentProductCategories',
@@ -302,7 +302,7 @@ class ProductCategoriesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $productCategory = $this->ProductCategories->get($id, contain: [
             'ParentProductCategories',
@@ -363,7 +363,7 @@ class ProductCategoriesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $productCategory = $this->ProductCategories->get($id);
@@ -398,6 +398,8 @@ class ProductCategoriesController extends AppController
      */
     public function import()
     {
+        $session = $this->getRequest()->getSession();
+
         if ($this->getRequest()->is('post') || !empty($this->getRequest()->getData())) {
 
             $postData = $this->getRequest()->getData();
@@ -469,9 +471,12 @@ class ProductCategoriesController extends AppController
                             Hash::merge(
                                 $productCategory,
                                 [
-                                    'slug'      => Text::slug(strtolower($productCategory['slug'])),
-                                    'created'   => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
-                                    'modified'  => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'uuid_id'       => Text::uuid(),
+                                    'slug'          => Text::slug(strtolower($productCategory['slug'])),
+                                    'created'       => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'created_by'    => $session->read('Auth.User.id'),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );
@@ -485,8 +490,9 @@ class ProductCategoriesController extends AppController
                             Hash::merge(
                                 $productCategory,
                                 [
-                                    'slug'      => Text::slug(strtolower($productCategory['slug'])),
-                                    'modified'  => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'slug'          => Text::slug(strtolower($productCategory['slug'])),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );

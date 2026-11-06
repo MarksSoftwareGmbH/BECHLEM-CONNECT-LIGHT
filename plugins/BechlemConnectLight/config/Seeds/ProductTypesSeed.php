@@ -26,12 +26,12 @@ declare(strict_types=1);
  */
 use Cake\I18n\DateTime;
 use Cake\Utility\Text;
-use Migrations\AbstractSeed;
+use Migrations\BaseSeed;
 
 /**
  * ProductTypes seed.
  */
-class ProductTypesSeed extends AbstractSeed
+class ProductTypesSeed extends BaseSeed
 {
     /**
      * Run Method.

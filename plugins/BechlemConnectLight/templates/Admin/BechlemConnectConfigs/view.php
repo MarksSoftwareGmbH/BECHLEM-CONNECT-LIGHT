@@ -123,9 +123,13 @@ $this->Breadcrumbs->add([
                     <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Status'); ?></dt>
                     <dd class="col-sm-9"><?= $this->BechlemConnectLight->status(h($bechlemConnectConfig->status)); ?></dd>
                     <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Created'); ?></dt>
-                    <dd class="col-sm-9"><?= h($bechlemConnectConfig->created->format('d.m.Y H:i:s')); ?></dd>
+                    <dd class="col-sm-9"><?= empty($bechlemConnectConfig->created)? '-': h($bechlemConnectConfig->created->format('d.m.Y H:i:s')); ?></dd>
+                    <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Created by'); ?></dt>
+                    <dd class="col-sm-9"><?= !empty($users)? $users[h($bechlemConnectConfig->created_by)]: h($bechlemConnectConfig->created_by); ?></dd>
                     <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Modified'); ?></dt>
-                    <dd class="col-sm-9"><?= h($bechlemConnectConfig->modified->format('d.m.Y H:i:s')); ?></dd>
+                    <dd class="col-sm-9"><?= empty($bechlemConnectConfig->modified)? '-': h($bechlemConnectConfig->modified->format('d.m.Y H:i:s')); ?></dd>
+                    <dt class="col-sm-3"><?= __d('bechlem_connect_light', 'Modified by'); ?></dt>
+                    <dd class="col-sm-9"><?= !empty($users)? $users[h($bechlemConnectConfig->modified_by)]: h($bechlemConnectConfig->modified_by); ?></dd>
                 </dl>
                 <hr/>
                 <dl>
@@ -224,7 +228,5 @@ $this->Breadcrumbs->add([
     </div>
 </div>
 
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/prism/prism.min'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/prism/prism.min', ['block' => 'scriptBottom']); ?>

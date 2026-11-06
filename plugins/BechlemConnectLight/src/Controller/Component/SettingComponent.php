@@ -66,9 +66,9 @@ class SettingComponent extends Component
     /**
      * Domain id
      *
-     * @var string
+     * @var int
      */
-    private int $domainId;
+    private int $domainId = 1;
 
     /**
      * Constructor hook method.
@@ -107,7 +107,7 @@ class SettingComponent extends Component
      *
      * @param \Cake\Event\Event $event Event instance.
      */
-    public function beforeFilter(Event $event)
+    public function beforeFilter(Event $event): void
     {
         $Controller = $event->getSubject();
 

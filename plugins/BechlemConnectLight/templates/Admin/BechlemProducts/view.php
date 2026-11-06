@@ -142,12 +142,12 @@ $this->Breadcrumbs->add([
                     <table id="referencedProducts" class="table table-hover">
                         <thead>
                         <tr>
-                            <th><?= __d('bechlem_connect_light', 'Type'); ?></th>
-                            <th><?= __d('bechlem_connect_light', 'Bechlem id'); ?></th>
-                            <th><?= __d('bechlem_connect_light', 'Your sku'); ?></th>
-                            <th><?= __d('bechlem_connect_light', 'Manufacturer sku'); ?></th>
-                            <th><?= __d('bechlem_connect_light', 'EAN'); ?></th>
-                            <th><?= __d('bechlem_connect_light', 'Name'); ?></th>
+                            <th><small><strong><?= __d('bechlem_connect_light', 'Type'); ?></strong></small></th>
+                            <th><small><strong><?= __d('bechlem_connect_light', 'Bechlem id'); ?></strong></small></th>
+                            <th><small><strong><?= __d('bechlem_connect_light', 'Your sku'); ?></strong></small></th>
+                            <th><small><strong><?= __d('bechlem_connect_light', 'Manufacturer sku'); ?></strong></small></th>
+                            <th><small><strong><?= __d('bechlem_connect_light', 'EAN'); ?></strong></small></th>
+                            <th><small><strong><?= __d('bechlem_connect_light', 'Name'); ?></strong></small></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -236,49 +236,23 @@ $this->Breadcrumbs->add([
     </div>
 </div>
 
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'prism' . DS . 'prism.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-bs4' . DS . 'css' . DS . 'dataTables.bootstrap4.min'); ?>
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-responsive' . DS . 'css' . DS . 'responsive.bootstrap4.min'); ?>
-<?= $this->Html->css('BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-buttons' . DS . 'css' . DS . 'buttons.bootstrap4.min'); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables' . DS . 'jquery.dataTables.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-bs4' . DS . 'js' . DS . 'dataTables.bootstrap4.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-responsive' . DS . 'js' . DS . 'dataTables.responsive.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-responsive' . DS . 'js' . DS . 'responsive.bootstrap4.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-buttons' . DS . 'js' . DS . 'dataTables.buttons.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-buttons' . DS . 'js' . DS . 'buttons.bootstrap4.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'jszip' . DS . 'jszip.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'pdfmake' . DS . 'pdfmake.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'pdfmake' . DS . 'vfs_fonts',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-buttons' . DS . 'js' . DS . 'buttons.html5.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-buttons' . DS . 'js' . DS . 'buttons.print.min',
-    ['block' => 'scriptBottom']); ?>
-<?= $this->Html->script(
-    'BechlemConnectLight' . '.' . 'admin' . DS . 'vendor' . DS . 'datatables-buttons' . DS . 'js' . DS . 'buttons.colVis.min',
-    ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight.admin/vendor/prism/prism.min'); ?>
+<?= $this->Html->script('BechlemConnectLight.admin/vendor/prism/prism.min', ['block' => 'scriptBottom']); ?>
+<?= $this->Html->css('BechlemConnectLight./adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min'); ?>
+<?= $this->Html->css('BechlemConnectLight./adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min'); ?>
+<?= $this->Html->css('BechlemConnectLight./adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min'); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/datatables/jquery.dataTables.min', ['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min',['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/datatables-responsive/js/dataTables.responsive.min',['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min',['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/datatables-buttons/js/dataTables.buttons.min',['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min',['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/jszip/jszip.min',['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/pdfmake/pdfmake.min',['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/pdfmake/vfs_fonts',['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/datatables-buttons/js/buttons.html5.min',['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/datatables-buttons/js/buttons.print.min',['block' => 'scriptBottom']); ?>
+<?= $this->Html->script('BechlemConnectLight./adminlte/plugins/datatables-buttons/js/buttons.colVis.min', ['block' => 'scriptBottom']); ?>
 
 <?php if (is_array($bechlemProduct->bechlem_product_accessories) && !empty($bechlemProduct->bechlem_product_accessories)): ?>
     <?= $this->Html->scriptBlock(

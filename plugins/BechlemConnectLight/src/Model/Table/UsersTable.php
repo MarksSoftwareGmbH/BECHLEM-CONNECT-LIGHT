@@ -101,7 +101,7 @@ class UsersTable extends Table
         ]);
 
         // Setup search filter using search manager
-        $this->searchManager()
+        $this->getBehavior('Search')->searchManager()
             ->value('role_id', [
                 'fields' => ['role_id']
             ])
@@ -109,6 +109,8 @@ class UsersTable extends Table
                 'fields' => ['locale_id']
             ])
             ->add('search', 'Search.Like', [
+                'multiValue' => true,
+                'multiValueSeparator' => ' ',
                 'before' => true,
                 'after' => true,
                 'fieldMode' => 'OR',
@@ -343,11 +345,11 @@ class UsersTable extends Table
     /**
      * Reset token method
      *
-     * @param $user
+     * @param object $user
      *
      * @return bool
      */
-    public function resetToken($user)
+    public function resetToken(object $user)
     {
         $user->token = Text::uuid();
         $user = $this->save($user);
@@ -361,7 +363,7 @@ class UsersTable extends Table
     /**
      * Send register confirmation email method
      *
-     * @param $user
+     * @param object $user
      * @param string $emailTransport
      * @param string $emailFormat
      * @param string $theme
@@ -369,7 +371,7 @@ class UsersTable extends Table
      * @return bool
      */
     public function sendRegisterConfirmationEmail(
-        $user,
+        object $user,
         string $emailTransport = 'default',
         string $emailFormat = 'text',
         string $theme = 'BechlemConnectLight'
@@ -398,7 +400,7 @@ class UsersTable extends Table
     /**
      * Send reset email method
      *
-     * @param $user
+     * @param object $user
      * @param array $resetUrl
      * @param string $emailTransport
      * @param string $emailFormat
@@ -407,7 +409,7 @@ class UsersTable extends Table
      * @return bool
      */
     public function sendResetPasswordEmail(
-        $user,
+        object $user,
         array $resetUrl,
         string $emailTransport = 'default',
         string $emailFormat = 'text',
@@ -436,12 +438,12 @@ class UsersTable extends Table
     /**
      * Change password from reset method
      *
-     * @param $user
+     * @param object $user
      * @param array $data
      *
      * @return bool|\Cake\Datasource\EntityInterface|false
      */
-    public function changePasswordFromReset($user, array $data)
+    public function changePasswordFromReset(object $user, array $data)
     {
         $user = $this->patchEntity($user, $data, [
             'fields' => [

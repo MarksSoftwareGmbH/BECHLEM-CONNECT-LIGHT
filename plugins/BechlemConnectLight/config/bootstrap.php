@@ -64,8 +64,6 @@ Cache::setConfig('bechlem_connect_light_users_login',
     )
 );
 
-Configure::write('CakePdf', ['engine' => 'CakePdf.Tcpdf']);
-
 // Load all EventHandlers defined in BechlemConnectLight\Config\events and later other activated Plugins
 EventManager::loadListeners();
 MenuManager::loadListeners();

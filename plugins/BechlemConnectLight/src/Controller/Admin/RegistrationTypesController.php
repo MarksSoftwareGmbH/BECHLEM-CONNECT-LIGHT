@@ -31,7 +31,9 @@ use BechlemConnectLight\Utility\BechlemConnectLight;
 use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
 use Cake\I18n\DateTime;
+use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
+use Cake\Utility\Text;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -78,7 +80,7 @@ class RegistrationTypesController extends AppController
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 
@@ -109,13 +111,21 @@ class RegistrationTypesController extends AppController
      * @param int|null $id
      * @return void
      */
-    public function view(int $id = null)
+    public function view(?int $id = null)
     {
         $registrationType = $this->RegistrationTypes->get($id, contain: ['Registrations']);
 
-        BechlemConnectLight::dispatchEvent('Controller.Admin.RegistrationTypes.beforeViewRender', $this, ['RegistrationType' => $registrationType]);
+        $Users = TableRegistry::getTableLocator()->get('BechlemConnectLight.Users');
+        $users = $Users
+            ->find('list', order: ['Users.name' => 'ASC'], keyField: 'id', valueField: 'name_username_email')
+            ->toArray();
 
-        $this->set('registrationType', $registrationType);
+        BechlemConnectLight::dispatchEvent('Controller.Admin.RegistrationTypes.beforeViewRender', $this, [
+            'RegistrationType'  => $registrationType,
+            'Users'             => $users,
+        ]);
+
+        $this->set(compact('registrationType', 'users'));
     }
 
     /**
@@ -160,7 +170,7 @@ class RegistrationTypesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function edit(int $id = null)
+    public function edit(?int $id = null)
     {
         $registrationType = $this->RegistrationTypes->get($id);
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
@@ -197,7 +207,7 @@ class RegistrationTypesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function copy(int $id = null)
+    public function copy(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post']);
 
@@ -228,7 +238,7 @@ class RegistrationTypesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function delete(int $id = null)
+    public function delete(?int $id = null)
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $registrationType = $this->RegistrationTypes->get($id);
@@ -264,6 +274,8 @@ class RegistrationTypesController extends AppController
      */
     public function import()
     {
+        $session = $this->getRequest()->getSession();
+
         if ($this->getRequest()->is('post') || !empty($this->getRequest()->getData())) {
 
             $postData = $this->getRequest()->getData();
@@ -333,8 +345,11 @@ class RegistrationTypesController extends AppController
                             Hash::merge(
                                 $registrationType,
                                 [
-                                    'created' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
-                                    'modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'uuid_id'       => Text::uuid(),
+                                    'created'       => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'created_by'    => $session->read('Auth.User.id'),
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
                                 ]
                             )
                         );
@@ -347,7 +362,10 @@ class RegistrationTypesController extends AppController
                             $existent,
                             Hash::merge(
                                 $registrationType,
-                                ['modified' => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss')]
+                                [
+                                    'modified'      => $dateTime->i18nFormat('yyyy-MM-dd HH:mm:ss'),
+                                    'modified_by'   => $session->read('Auth.User.id'),
+                                ]
                             )
                         );
                         if ($this->RegistrationTypes->save($registrationType)) {
